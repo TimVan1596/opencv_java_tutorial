@@ -1,39 +1,32 @@
-# OpenCV Java 教程
+#CHAPTER 4 OpenCV Basics  
+#第四章 OpenCV基础
 
-#### 介绍
-{**以下是码云平台说明，您可以替换此简介**
-码云是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+---
+***Note***: We assume that by now you have already read the previous tutorials. If not, please check previous tutorials at
+[http://opencv-java-tutorials.readthedocs.org/en/latest/index.html](http://opencv-java-tutorials.readthedocs.org/en/latest/index.html). You can also find the source code and resources at
+[https://github.com/opencv-java/](https://github.com/opencv-java/)
+---
 
-#### 软件架构
-软件架构说明
+---
+***注意***：我们假设您现在已经阅读了之前的教程。如果没有，请查看以前的教程，网址为
+[http://opencv-java-tutorials.readthedocs.org/en/latest/index.html](http://opencv-java-tutorials.readthedocs.org/en/latest/index.html) 。您还可以在以下位置找到源代码和资源
+[https://github.com/opencv-java/](https://github.com/opencv-java/)
+---
 
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 码云特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+##4.3 Color channel checkbox
+The graphic interface is complete for the first task, now we need to work on the controller; in the previous tutorial we
+could control the number of channels displayed on screen with the line:  
+这个图形界面的第一个任务已经完成，现在我们需要在控制器上工作；在上一个教程中，我们
+可以控制该行在屏幕上显示的频道数：
+`
+Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
+`  
+In order to control this conversion with the check box, we have to link the check box with a FXML variable:  
+`@FXML
+private CheckBox grayscale;`  
+Now we can implement the control by adding a simple “if” condition which will perform the conversion only if our
+check box is checked:  
+`if (grayscale.isSelected())
+{
+Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
+}`  
