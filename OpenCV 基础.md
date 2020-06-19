@@ -1,5 +1,5 @@
-#CHAPTER 4 OpenCV Basics  
-#第四章 OpenCV基础
+# CHAPTER 4 OpenCV Basics  
+# 第四章 OpenCV基础
 
 ---
 ***Note***: We assume that by now you have already read the previous tutorials. If not, please check previous tutorials at
@@ -12,18 +12,20 @@
 [http://opencv-java-tutorials.readthedocs.org/en/latest/index.html](http://opencv-java-tutorials.readthedocs.org/en/latest/index.html) 。您还可以在以下位置找到源代码和资源：
 [https://github.com/opencv-java/](https://github.com/opencv-java/)
 ---
-##4.1 What we will do in this tutorial
+## 4.1 What we will do in this tutorial
+在这个教程中我们将做些什么
 In this guide, we will:  
-
+在本教程中，我们将：
 • Create a basic checkbox interaction to alter the color of the video stream.  
-
-• Add a basic checkbox interaction to “alpha over” a logo to the video stream.  
-
+•创建一个初步的交互复选框，可以修改视频流的颜色；
+• Add a basic checkbox interaction to “alpha over” a logo to the video stream. 
+•新增一个初步的交互复选框去“阿尔法覆盖”一个徽标到视频流中；
 • Display the video stream histogram (both one and three channels).
-##4.2 Getting Started
-For this tutorial we can create a new JavaFX project and build a scene as the one realized in the previous one. So we’ve
-got a window with a border pane in which:  
-
+•显示该视频流的直方图（包括单信道和三信道）。
+## 4.2 Getting Started
+准备
+For this tutorial we can create a new JavaFX project and build a scene as the one realized in the previous one. So we’ve got a window with a border pane in which:  
+为了操作这个教程，我们先来创建一个新的JavaFX项目并在项目中构建一个场景，这个场景要与前面章节已经做出来的场景相同。这样一来，我们就会得到一个含有子窗口的窗口。在子窗口中：
 • in the BOTTOM we have a button inside a HBox:
 ```
 <HBox alignment="CENTER" >
@@ -34,42 +36,47 @@ got a window with a border pane in which:
 ˓→ #startCamera" />
 </HBox>
 ```
+•位于底部的Hbox里面有一个“启动相机”的按钮
 • in the CENTER we have a ImageView:  
 ```
 <ImageView fx:id="currentFrame" />
 ```
-
-##4.3 Color channel checkbox
-Let’s open our fxml file with Scene Builder and add to the RIGHT field of our BorderPane a vertical box VBox. A
-VBox lays out its children in a single vertical column. If the VBox has a border and/or padding set, then the contents
-will be layed out within those insets. Also it will resize children (if resizable) to their preferred heights and uses its fillWidth property to determine whether to resize their widths to fill its own width or keep their widths to their preferred (fillWidth defaults to true). A HBox works just like a VBox but it lays out its children horizontally instead of vertically.  
-
+•位于中央的为“视图预览”界面：
+##4.3 Color channel checkbox   
+颜色信道复选框
+Let’s open our fxml file with Scene Builder and add to the RIGHT field of our BorderPane a vertical box VBox. A VBox lays out its children in a single vertical column. If the VBox has a border and/or padding set, then the contents will be laid out within those insets. Also it will resize children (if resizable) to their preferred heights and uses its fillWidth property to determine whether to resize their widths to fill its own width or keep their widths to their preferred (fillWidth defaults to true). A HBox works just like a VBox but it lays out its children horizontally instead of vertically.  
+我们用Scene Builder打开fxml文件并在子窗口的右方区域添加一个垂直框Vbox。Vbox通常在一个独立纵栏展开其子项。如果对Vbox设置边框和/或填充，则Vbox将在这些填充物中展开其子项。Vbox也会自动调整子项的高度为最佳高度（如果可调整的话）。Vbox还会通过它的填充宽度属性来判定是将子项的宽度调整为Vbox自身的宽度还是最佳宽度（填充宽度默认为真）。Hbox的运行方式类似于Vbox但前者不是垂直地而是水平地展开子项。
 Now we can put inside the VBox a new checkbox, change its text to “Show in gray scale”, and set an id (e.g.,
 “grayscale”).  
+现在我们在Vbox中添加一个新的复选框，修改其文本内容为“用灰色调显示”，并设置id（例如“灰度”）。
 ```
 <CheckBox fx:id="grayscale" text="Show in gray scale" />
 ```
 Let’s also add a title to this section by putting a text before our new checkbox, but still inside the VBox. Then, set its
 text to “Controls” (we can find the text element under the Shapes menu).  
+我们还要为这部分添加一个标题，添加方法是在新添加的复选框前面再放置一个新的文本，但这个文本仍然要在原来的Vbox内。在这之后，我们将此文本的内容设定为“控件”（可以在“形状”菜单下找到“文本要素”这一栏）。
 ```
 <Text text="Controls" />
 ```
-In the Scene Builder we now have:    
+In the Scene Builder we now have: 
+在Scene Builder中，我们现在得到了：
 ![NFDM0s.png](https://s1.ax1x.com/2020/06/16/NFDM0s.png)  
 
 The graphic interface is complete for the first task, now we need to work on the controller; in the previous tutorial we
 could control the number of channels displayed on screen with the line:  
-这个图形界面的第一个任务已经完成，现在我们需要在控制器上工作；在上一个教程中，我们可以控制该行在屏幕上显示的频道数：
+第一个任务的可视界面已经完成，现在我们需要改进控制器；在上一个教程中，我们可以控制在屏幕上显示的信道数是通过了下列这行代码：
 ```
 Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
 ```  
 In order to control this conversion with the check box, we have to link the check box with a FXML variable:  
+为了能够通过复选框来控制此转换，我们必须给复选框链接上FXML变量。
 ```
 @FXML  
 private CheckBox grayscale;
 ```  
 Now we can implement the control by adding a simple “if” condition which will perform the conversion only if our
 check box is checked:   
+现在我们只要添加一个简单的if条件就可以实现控制：只有当复选框被选中时if条件才会执行转换。
 ```
 if (grayscale.isSelected())  
 {
