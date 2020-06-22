@@ -36,25 +36,25 @@ For this tutorial we can create a new JavaFX project and build a scene as the on
 ˓→ #startCamera" />
 </HBox>
 ```
-•位于底部的Hbox里面有一个“启动相机”的按钮
+•位于底部的Hbox里面有一个“Start Camera”的按钮
 • in the CENTER we have a ImageView:  
 ```
 <ImageView fx:id="currentFrame" />
 ```
-•位于中央的为“视图预览”界面：
+•位于中央的为视图预览界面：
 ##4.3 Color channel checkbox   
 颜色信道复选框
 Let’s open our fxml file with Scene Builder and add to the RIGHT field of our BorderPane a vertical box VBox. A VBox lays out its children in a single vertical column. If the VBox has a border and/or padding set, then the contents will be laid out within those insets. Also it will resize children (if resizable) to their preferred heights and uses its fillWidth property to determine whether to resize their widths to fill its own width or keep their widths to their preferred (fillWidth defaults to true). A HBox works just like a VBox but it lays out its children horizontally instead of vertically.  
 我们用Scene Builder打开fxml文件并在子窗口的右方区域添加一个垂直框Vbox。Vbox通常在一个独立纵栏展开其子项。如果对Vbox设置边框和/或填充，则Vbox将在这些填充物中展开其子项。Vbox也会自动调整子项的高度为最佳高度（如果可调整的话）。Vbox还会通过它的填充宽度属性来判定是将子项的宽度调整为Vbox自身的宽度还是最佳宽度（填充宽度默认为真）。Hbox的运行方式类似于Vbox但前者不是垂直地而是水平地展开子项。
 Now we can put inside the VBox a new checkbox, change its text to “Show in gray scale”, and set an id (e.g.,
 “grayscale”).  
-现在我们在Vbox中添加一个新的复选框，修改其文本内容为“用灰色调显示”，并设置id（例如“灰度”）。
+现在我们在Vbox中添加一个新的复选框，修改其文本内容为“Show in gray scale”，并设置fxid（例如“gray scale”）。
 ```
 <CheckBox fx:id="grayscale" text="Show in gray scale" />
 ```
 Let’s also add a title to this section by putting a text before our new checkbox, but still inside the VBox. Then, set its
 text to “Controls” (we can find the text element under the Shapes menu).  
-我们还要为这部分添加一个标题，添加方法是在新添加的复选框前面再放置一个新的文本，但这个文本仍然要在原来的Vbox内。在这之后，我们将此文本的内容设定为“控件”（可以在“形状”菜单下找到“文本要素”这一栏）。
+我们还要为这部分添加一个标题，添加方法是在新添加的复选框前面再放置一个新的文本，但这个文本仍然要在原来的Vbox内。在这之后，我们将此文本的内容设定为“Controls”（可以在“形状”菜单下找到“文本要素”这一栏）。
 ```
 <Text text="Controls" />
 ```
@@ -64,7 +64,7 @@ In the Scene Builder we now have:
 
 The graphic interface is complete for the first task, now we need to work on the controller; in the previous tutorial we
 could control the number of channels displayed on screen with the line:  
-第一个任务的可视界面已经完成，现在我们需要改进控制器；在上一个教程中，我们可以控制在屏幕上显示的信道数是通过了下列这行代码：
+第一个任务的可视界面已经完成，现在我们需要改进控制器；在上一个教程中，我们通过下列这行代码就可以控制显示在屏幕上的信道数：
 ```
 Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
 ```  
@@ -84,12 +84,21 @@ Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
 }
 ``` 
 ##4.4  Load an Image and Add it to the Stream
+
 The next step is to add another check box which, if checked, will trigger the display of an image over the camera
-stream. Let’s start by adding the image to the project; create a new folder in the root directory of your project and
-put the image in there. In my project I have a resources folder with a Poli.png image. Go back to Eclipse and
-refresh your project (you should have the new folder in it). Let’s open the FXML file with Scene Builder and add a
-new checkbox below the one that controls the stream colors; we have to set the text, the name of the method in the
-OnAction field and an id. In the code we will have for example:  
+stream. 
+接下来要再添加一个复选框，这个复选框如果被选中图像就会显示在相机流上。
+Let’s start by adding the image to the project; create a new folder in the root directory of your project and
+put the image in there.
+具体的方法是首先在项目里添加一个图像，即在项目的根目录里创建一个文件夹然后将图像放到这个文件夹里。
+ In my project I have a resources folder with a Poli.png image. 
+ 那么现在在我的项目里就有一个资源文件夹，这个文件夹带有一张名称为Poli.png的照片。
+ Go back to Eclipse and refresh your project (you should have the new folder in it).
+ 现在回到Eclipse并刷新项目（你的项目里应该要包含新的文件夹）。
+  Let’s open the FXML file with Scene Builder and add a new checkbox below the one that controls the stream colors; we have to set the text, the name of the method in the OnAction field and an id. 
+  接下来用Scene Builder打开之前的FXML文件并在控制视频流颜色的复选框下面再添加一个新的复选框。我们需要将它的文本设定为“Show logo”，它在OnAction这一栏的方法名称设为“Loadlogo”，以及它的fxid设为“logoCheckBox”。
+  In the code we will have for example:  
+  代码我们可以这样写：
 ```
 <CheckBox fx:id="logoCheckBox" text="Show logo" onAction="#loadLogo" />
 ```
