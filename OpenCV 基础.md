@@ -45,7 +45,7 @@ For this tutorial we can create a new JavaFX project and build a scene as the on
 <ImageView fx:id="currentFrame" />
 ```
 
-##4.3 Color channel checkbox   颜色信道复选框
+## 4.3 Color channel checkbox   颜色信道复选框
 Let’s open our fxml file with Scene Builder and add to the RIGHT field of our BorderPane a vertical box VBox. A VBox lays out its children in a single vertical column. If the VBox has a border and/or padding set, then the contents will be laid out within those insets. Also it will resize children (if resizable) to their preferred heights and uses its fillWidth property to determine whether to resize their widths to fill its own width or keep their widths to their preferred (fillWidth defaults to true). A HBox works just like a VBox but it lays out its children horizontally instead of vertically.    
 我们用Scene Builder打开fxml文件并在子窗口的右方区域添加一个垂直框Vbox。Vbox通常在一个独立纵栏展开其子项。如果对Vbox设置边框和/或填充，则Vbox将在这些填充物中展开其子项。Vbox也会自动调整子项的高度为最佳高度（如果可调整的话）。Vbox还会通过它的填充宽度属性来判定是将子项的宽度调整为Vbox自身的宽度还是最佳宽度（填充宽度默认为真）。Hbox的运行方式类似于Vbox但前者不是垂直地而是水平地展开子项。  
   
@@ -86,7 +86,7 @@ if (grayscale.isSelected())
 Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
 }
 ``` 
-##4.4  Load an Image and Add it to the Stream
+## 4.4  Load an Image and Add it to the Stream
 The next step is to add another check box which, if checked, will trigger the display of an image over the camera stream. Let’s start by adding the image to the project; create a new folder in the root directory of your project and put the image in there. In my project I have a resources folder with a Poli.png image. Go back to Eclipse and refresh your project (you should have the new folder in it). Let’s open the FXML file with Scene Builder and add a new checkbox below the one that controls the stream colors; we have to set the text, the name of the method in the OnAction field and an id. In the code we will have for example:  
 接下来要再添加一个复选框，这个复选框如果被选中图像就会显示在相机流上。具体的方法是首先在项目里添加一个图像，即在项目的根目录里创建一个文件夹然后将图像放到这个文件夹里。那么现在在我的项目里就有一个资源文件夹，这个文件夹带有一张名称为Poli.png的照片。现在回到Eclipse并刷新项目（你的项目里应该包含了新的文件夹）。接下来用Scene Builder打开之前的FXML文件并在控制视频流颜色的复选框下面再添加一个新的复选框。我们需要将它的Text设定为“Show logo”，它在OnAction这一栏填为“Loadlogo”，以及它的id设为“logoCheckBox”。例如代码就会是这样： 
 ```
