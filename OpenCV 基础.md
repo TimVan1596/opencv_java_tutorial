@@ -20,7 +20,7 @@ In this guide, we will:
 •创建一个初步的交互复选框，可以修改视频流的颜色；    
 
 • Add a basic checkbox interaction to “alpha over” a logo to the video stream.   
-•新增一个初步的交互复选框去“阿尔法覆盖”一个徽标到视频流中；    
+•新增一个初步的交互复选框去“透明叠加”一个徽标到视频流中；    
 
 • Display the video stream histogram (both one and three channels).  
 •显示该视频流的直方图（包括单信道和三信道）。
@@ -93,7 +93,7 @@ The next step is to add another check box which, if checked, will trigger the di
 <CheckBox fx:id="logoCheckBox" text="Show logo" onAction="#loadLogo" />
 ```
 In the controller file we have to define a new variable associated with the checkbox, the method set on the OnAction field and adapt the code so that it will display the logo when the checkbox is checked and the stream is on.  
-我们要在controller class这一栏定义一个与“logoCheckbox”相链接的新的变量“Checkbox”并且改写代码以便当复选框被选中且视频流开启时徽标可以显示在屏幕上。  
+我们要在controller class这一栏定义一个与“logoCheckbox”相链接的新的变量“Checkbox”并且相应地修改代码以便当复选框被选中且视频流开启时徽标可以显示在屏幕上。  
 **Variable**:  
 **变量**：
 ```
@@ -104,6 +104,7 @@ private CheckBox logoCheckBox;
 loadLogo method: In this method we are going to load the image whenever the logoCheckBox id selected (checked).
 In order to load the image we have to use a basic OpenCV function: imread. It returns a Mat and takes the path of the
 image and a flag (> 0 RGB image, =0 grayscale, <0 with the alpha channel).
+loadlogo方法：使用这种方法时，只要logoCheckbox这个id被选择（选中），图像就会加载出来。为了载入图像，我们需要使用到一个基本的OpenCV函数——imread。imread在返回矩阵的同时还会获取图像和标记的路径（矩阵> 0，RGB图像；矩阵= 0，灰度图；矩阵<0，图像带有alpha通道）。
 ```
 @FXML
 protected void loadLogo()
@@ -113,22 +114,24 @@ this.logo = Imgcodecs.imread("resources/Poli.png");
 }
 ```
 Adapt the code.  
+修改代码。  
 
-We are going to add some variants to the code in order to display our logo in a specific region of the stream. This
-means that for each frame capture, before the image could be converted into 1 or 3 channels, we have to set a **ROI**
-(region of interest) in which we want to place the logo. Usually a ROI of an image is a portion of it, we can define the ROI as a Rect object. Rect is a template class for 2D rectangles, described by the following parameters:  
+We are going to add some variants to the code in order to display our logo in a specific region of the stream. This means that for each frame capture, before the image could be converted into 1 or 3 channels, we have to set a **ROI**(region of interest) in which we want to place the logo. Usually a ROI of an image is a portion of it, we can define the ROI as a Rect object. Rect is a template class for 2D rectangles, described by the following parameters:   
+我们之所以要在代码里面添加一些变量是为了让我们的徽标能够出现在视频流的特定区域。也就是说，在每一次帧捕获的图像被转换成单通道或三通道之前，我们都需要设定1个ROI（感兴趣的区域，即我们想放置徽标的区域）。一般来说图像的ROI是图像本身的一部分，我们不妨定义ROI为Rect对象。Rect是二维矩形的一个模板类，由以下参数表示：  
 
 • Coordinates of the top-left corner. This is a default interpretation of Rect.x and Rect.y in OpenCV. Though, in
-your algorithms you may count x and y from the bottom-left corner.  
+your algorithms you may count x and y from the bottom-left corner.    
+•以左上角为原点的坐标系。这是OpenCV对于Rect.x和Rect.y的一种默认理解。不过在你自己的算法中，你还是可以使用以左下角为原点的坐标系的。  
 
-• Rectangle width and height.  
-
+• Rectangle width and height.    
+•矩形的宽度和高度。
 ```
 Rect roi = new Rect(frame.cols()-logo.cols(), frame.rows()-logo.rows(), logo.cols(),
 ˓→ logo.rows());
 ```
-Then we have to take control of our Mat’s ROI, by doing so we are able to “add” our logo in the disired area of the
-frame defined by the ROI.  
+Then we have to take control of our Mat’s ROI, by doing so we are able to “add” our logo in the desired area of the
+frame defined by the ROI.      
+接着我们需要控制被返回的矩阵的ROI，这样一来就可以将徽标放置到帧的理想区域。而帧的理想区域则是由ROI所界定出来的。  
 
 ```
 Mat imageROI = frame.submat(roi);
