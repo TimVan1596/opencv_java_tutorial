@@ -101,9 +101,8 @@ In the controller file we have to define a new variable associated with the chec
 
 private CheckBox logoCheckBox;
 ```
-loadLogo method: In this method we are going to load the image whenever the logoCheckBox id selected (checked).
-In order to load the image we have to use a basic OpenCV function: imread. It returns a Mat and takes the path of the
-image and a flag (> 0 RGB image, =0 grayscale, <0 with the alpha channel).
+loadLogo method: In this method we are going to load the image whenever the logoCheckBox id selected (checked).In order to load the image we have to use a basic OpenCV function: imread. It returns a Mat and takes the path of the
+image and a flag (> 0 RGB image, =0 grayscale, <0 with the alpha channel).  
 loadlogo方法：使用这种方法时，只要logoCheckbox这个id被选择（选中），图像就会加载出来。为了载入图像，我们需要使用到一个基本的OpenCV函数——imread。imread在返回矩阵的同时还会获取图像和标记的路径（矩阵> 0，RGB图像；矩阵= 0，灰度图；矩阵<0，图像带有alpha通道）。
 ```
 @FXML
