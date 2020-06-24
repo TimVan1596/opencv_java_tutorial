@@ -148,8 +148,9 @@ dst = src1*alpha + src2*beta + gamma
 ---
 **Note**: Saturation is not applied when the output array has the depth CV_32S. You may even get result of an incorrect
 sign in the case of overflow.   
-**注意** :当输出数组其图像元素的位深度为有符号32位整型时，**不涉及到色饱和度**。如果位深度取值溢出的话，甚至可能得到的结果是错误的符号。
----
+**注意** :当输出数组其图像元素的位深度为有符号32位整型时，**不涉及到色饱和度**。如果位深度取值溢出的话，甚至可能得到的结果是错误的符号。  
+---  
+
 **Parameters**:    
 **参数**： 
  
@@ -200,7 +201,7 @@ Core.addWeighted(imageROI, 1.0, logo,   0.7, 0.0, imageROI);
 // logo.copyTo(imageROI, mask);  
 }
 ```
-##4.5 Calculate a Histogram
+## 4.5 Calculate a Histogram
 A histogram is a collected counts of data organized into a set of predefined bins. In our case the data represents the
 intensity of the pixel so it will have a range like (0, 256).  
 直方图是收集的数据的值，这些值在图中被分配到了一组预先设定好的统计堆栈中去。在我们这里数据代表像素强度因此数据的取值范围是（0,256）。  
