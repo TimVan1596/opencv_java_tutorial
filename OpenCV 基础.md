@@ -51,7 +51,7 @@ Let’s open our fxml file with Scene Builder and add to the RIGHT field of our 
   
 Now we can put inside the VBox a new checkbox, change its text to “Show in gray scale”, and set an id (e.g.,
 “grayscale”).    
-现在我们在Vbox中添加一个新的复选框，修改其文本内容为“Show in gray scale”，并设置id（例如“gray scale”）。
+现在我们在Vbox中添加一个新的复选框，修改其文本内容为“Show in gray scale”，并设置id（例如“grayscale”）。
 ```
 <CheckBox fx:id="grayscale" text="Show in gray scale" />
 ```
@@ -103,7 +103,7 @@ private CheckBox logoCheckBox;
 ```
 loadLogo method: In this method we are going to load the image whenever the logoCheckBox id selected (checked).In order to load the image we have to use a basic OpenCV function: imread. It returns a Mat and takes the path of the
 image and a flag (> 0 RGB image, =0 grayscale, <0 with the alpha channel).  
-loadlogo方法：使用这种方法时，只要logoCheckbox这个id被选择（选中），图像就会加载出来。为了载入图像，我们需要使用到一个基本的OpenCV函数——imread。imread在返回矩阵的同时还会获取图像和标记的路径（矩阵> 0，RGB图像；矩阵= 0，灰度图；矩阵<0，图像带有alpha通道）。
+loadlogo方法：使用这种方法时，只要logoCheckbox这个id被选择（选中），图像就会加载出来。为了载入图像，我们需要使用到一个基本的OpenCV函数——imread。imread在返回矩阵的同时还会获取图像的路径和标记（矩阵> 0，RGB图像；矩阵= 0，灰度图；矩阵<0，图像带有alpha通道）。
 ```
 @FXML
 protected void loadLogo()
@@ -116,11 +116,11 @@ Adapt the code.
 修改代码。  
 
 We are going to add some variants to the code in order to display our logo in a specific region of the stream. This means that for each frame capture, before the image could be converted into 1 or 3 channels, we have to set a **ROI**(region of interest) in which we want to place the logo. Usually a ROI of an image is a portion of it, we can define the ROI as a Rect object. Rect is a template class for 2D rectangles, described by the following parameters:   
-我们之所以要在代码里面添加一些变量是为了让我们的徽标能够出现在视频流的特定区域。也就是说，在每一次帧捕获的图像被转换成单通道或三通道之前，我们都需要设定1个ROI（感兴趣的区域，即我们想放置徽标的区域）。一般来说图像的ROI是图像本身的一部分，我们不妨定义ROI为Rect对象。Rect是二维矩形的一个模板类，由以下参数表示：  
+我们之所以要在代码里面添加一些变量是为了让我们的徽标能够出现在视频流的特定区域。也就是说，在每一次帧捕获的图像被转换成单通道或三通道之前，我们都需要设定一个ROI（感兴趣的区域，即我们想放置徽标的区域）。一般来说图像的ROI是图像本身的一部分，我们不妨定义ROI为Rect对象。Rect是二维矩形的一个模板类，由以下参数表示：  
 
 • Coordinates of the top-left corner. This is a default interpretation of Rect.x and Rect.y in OpenCV. Though, in
 your algorithms you may count x and y from the bottom-left corner.    
-•以左上角为原点的坐标系。这是OpenCV对于Rect.x和Rect.y的一种默认理解。不过在你自己的算法中，你还是可以使用以左下角为原点的坐标系的。  
+•以左上角为原点的坐标系。这是OpenCV对于Rect.x和Rect.y的一种默认理解。不过在你自己的算法中，还是可以使用以左下角为原点的坐标系的。  
 
 • Rectangle width and height.    
 •矩形的宽度和高度。
@@ -135,50 +135,57 @@ frame defined by the ROI.
 ```
 Mat imageROI = frame.submat(roi);
 ```
-We had to make this operation because we can only “add” Mats with the same sizes; but how can we “add” two Mat
-together? We have to keep in mind that our logo could have 4 channels (RGB + alpha). So we could use two functions:
+We had to make this operation because we can only “add” Mats with the same sizes; but how can we “add” two Mat together? We have to keep in mind that our logo could have 4 channels (RGB + alpha). So we could use two functions:
 addWeighted or copyTo. The addWeighted function calculates the weighted sum of two arrays as follows:  
-
+之所以我们要执行上述操作是因为我们现在只能添加同等大小的矩阵。那么怎么样才能添加不同大小的矩阵呢？我们必须牢记的是所要添加的徽标可能有4种通道（RGB以及α通道）。鉴于此我们可以使用addWeighted和copyTo这两个函数。前者（addWeighted）通过如下公式计算两个数组的加权和：  
 dst(I)= saturate(src1(I) alpha + src2(I)* beta + gamma)*  
 
 where I is a multi-dimensional index of array elements. In case of multi-channel arrays, each channel is processed
-independently. The function can be replaced with a matrix expression:  
-
+independently. The function can be replaced with a matrix expression:    
+式中I代表数组元素的一个多维索引。如果数组为多通道的情况下，每个通道都会被彼此独立地处理。该函数可以用如下的矩阵表达式替换：  
 dst = src1*alpha + src2*beta + gamma  
 
 ---
 **Note**: Saturation is not applied when the output array has the depth CV_32S. You may even get result of an incorrect
-sign in the case of overflow.  
+sign in the case of overflow.   
+**注意** :当输出数组其图像元素的位深度为有符号32位整型时，**不涉及到色饱和度**。如果位深度取值溢出的话，甚至可能得到的结果是错误的符号。
 ---
-**Parameters**:  
+**Parameters**:    
+**参数**： 
+ 
+• **src1** first input array.    
+•**src1**：首次输入的数组。
 
-• **src1** first input array.  
+• **alpha** weight of the first array elements.    
+•**alpha**：第一数组元素的权重。  
 
-• **alpha** weight of the first array elements.  
+• **src2** second input array of the same size and channel number as src1.    
+• **src2**：第二次输入的数组，其大小、通道数均与首次输入数组的相同。   
 
-• **src2** second input array of the same size and channel number as src1.  
+• **beta** weight of the second array elements.    
+• **beta**：第二数组元素的权重。  
 
-• **beta** weight of the second array elements.  
+• **gamma** scalar added to each sum.    
+• **gamma**：添加到每组和的标量。  
 
-• **gamma** scalar added to each sum.  
+• **dst** output array that has the same size and number of channels as the input arrays.    
+• **dst** ：输出的数组，其大小、通道数均与两次输入数组的相同。  
 
-• **dst** output array that has the same size and number of channels as the input arrays.  
-
-So we’ll have:  
-
+So we’ll have:    
+因此我们可以得到：
 ```
 Core.addWeighted(imageROI, 1.0, logo, 0.7, 0.0, imageROI);
 ```
-The second method (copyTo) simply copies a Mat into the other. We’ll have:  
-
+The second method (copyTo) simply copies a Mat into the other. We’ll have:    
+后者（copyTo）直接地将一个矩阵复制到另外一个矩阵。我们可以得到：
 ```
 Mat mask = logo.clone();  
 
 logo.copyTo(imageROI, mask);
 ```
 Everything we have done so far to add the logo to the image has to perform only IF our checkbox is check and the
-image loading process has ended successfully. So we have to add an if condition:  
-
+image loading process has ended successfully. So we have to add an if condition:   
+到目前为止我们所做的一切都是为了把徽标添加到图像中去。只有当logoCheckbox复选框被选中且图像最终成功地加载出来，才可以实现我们之前的操作。因此我们必须增加一个if条件：
 ```
 if (logoCheckBox.isSelected() && this.logo != null)  
 {  
@@ -196,9 +203,9 @@ Core.addWeighted(imageROI, 1.0, logo,   0.7, 0.0, imageROI);
 ##4.5 Calculate a Histogram
 A histogram is a collected counts of data organized into a set of predefined bins. In our case the data represents the
 intensity of the pixel so it will have a range like (0, 256).  
-
+直方图是收集的数据的值，这些值在图中被分配到了一组预先设定好的统计堆栈中去。在我们这里数据代表像素强度因此数据的取值范围是（0,256）。  
 **Since we know that the range of information value, we can segment our range in subparts (called bins); let’s identify some parts of the histogram:**  
-
+**既然我们知道了数据的取值范围，就可以将其划分成一些小的子部分（称为统计堆栈）。接下来就来辨别一下直方图的某些部分：**  
 **1. dims**: The number of parameters you want to collect data of.  
 **2. bins**: It is the number of subdivisions in each dim. In our example, bins = 256  
 **3. range**: The limits for the values to be measured. In this case: range = [0,255]  
