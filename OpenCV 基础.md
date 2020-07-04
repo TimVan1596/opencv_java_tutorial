@@ -1,34 +1,22 @@
-# CHAPTER 4 OpenCV Basics  
 # 第四章 OpenCV基础
 
 ---
-***Note***: We assume that by now you have already read the previous tutorials. If not, please check previous tutorials at
-[http://opencv-java-tutorials.readthedocs.org/en/latest/index.html](http://opencv-java-tutorials.readthedocs.org/en/latest/index.html). You can also find the source code and resources at
-[https://github.com/opencv-java/](https://github.com/opencv-java/)
+***注意***：我们假设您现在已经阅读了之前的教程。如果没有，请在[http://opencv-java-tutorials.readthedocs.org/en/latest/index.html](http://opencv-java-tutorials.readthedocs.org/en/latest/index.html)查看。您还可以在
+[https://github.com/opencv-java/](https://github.com/opencv-java/)找到源代码和资源。
 ---
+## 4.1在本教程中要做什么  
 
----
-***注意***：我们假设您现在已经阅读了之前的教程。如果没有，请查看以前的教程，网址为
-[http://opencv-java-tutorials.readthedocs.org/en/latest/index.html](http://opencv-java-tutorials.readthedocs.org/en/latest/index.html) 。您还可以在以下位置找到源代码和资源：
-[https://github.com/opencv-java/](https://github.com/opencv-java/)
----
-## 4.1 What we will do in this tutorial 在这个教程中我们将做些什么
-In this guide, we will:   
 在本教程中，我们将：  
-  
-• Create a basic checkbox interaction to alter the color of the video stream.  
+ 
 •创建一个初步的交互复选框，可以修改视频流的颜色；    
-
-• Add a basic checkbox interaction to “alpha over” a logo to the video stream.   
+  
 •新增一个初步的交互复选框去“透明叠加”一个徽标到视频流中；    
 
-• Display the video stream histogram (both one and three channels).  
-•显示该视频流的直方图（包括单信道和三信道）。
-## 4.2 Getting Started准备
-For this tutorial we can create a new JavaFX project and build a scene as the one realized in the previous one. So we’ve got a window with a border pane in which:    
-为了操作这个教程，我们先来创建一个新的JavaFX项目并在项目中构建一个场景，这个场景要与前面章节已经做出来的场景相同。这样一来，我们就会得到一个含有子窗口的窗口。在子窗口中：  
-• in the BOTTOM we have a button inside a HBox:    
-•位于底部的Hbox里面有一个“Start Camera”的按钮
+•显示该视频流的直方图（包括单通道和三通道）。
+## 4.2 准备  
+&emsp;&emsp;关于这个教程，我们先来创建一个新的JavaFX项目并在项目中构建一个场景，这个场景要与前面章节已经做出来的相同。这样一来，我们就会得到一个含有子窗口的窗口。在子窗口中：  
+  
+•位于底部的Hbox里面有一个“Start Camera”按钮：
 ```
 <HBox alignment="CENTER" >
 <padding>
@@ -38,72 +26,53 @@ For this tutorial we can create a new JavaFX project and build a scene as the on
 ˓→ #startCamera" />
 </HBox>
 ```
-
-• in the CENTER we have a ImageView:  
 •位于中央的为视图预览界面：
 ```
 <ImageView fx:id="currentFrame" />
 ```
 
-## 4.3 Color channel checkbox   颜色信道复选框
-Let’s open our fxml file with Scene Builder and add to the RIGHT field of our BorderPane a vertical box VBox. A VBox lays out its children in a single vertical column. If the VBox has a border and/or padding set, then the contents will be laid out within those insets. Also it will resize children (if resizable) to their preferred heights and uses its fillWidth property to determine whether to resize their widths to fill its own width or keep their widths to their preferred (fillWidth defaults to true). A HBox works just like a VBox but it lays out its children horizontally instead of vertically.    
-我们用Scene Builder打开fxml文件并在子窗口的右方区域添加一个垂直框Vbox。Vbox通常在一个独立纵栏展开其子项。如果对Vbox设置边框和/或填充，则Vbox将在这些填充物中展开其子项。Vbox也会自动调整子项的高度为最佳高度（如果可调整的话）。Vbox还会通过它的填充宽度属性来判定是将子项的宽度调整为Vbox自身的宽度还是最佳宽度（填充宽度默认为真）。Hbox的运行方式类似于Vbox但前者不是垂直地而是水平地展开子项。  
-  
-Now we can put inside the VBox a new checkbox, change its text to “Show in gray scale”, and set an id (e.g.,
-“grayscale”).    
-现在我们在Vbox中添加一个新的复选框，修改其文本内容为“Show in gray scale”，并设置id（例如“grayscale”）。
+## 4.3 颜色通道复选框  
+&emsp;&emsp;我们用Scene Builder打开fxml文件并在子窗口的右方区域添加一个垂直框Vbox。Vbox在一个独立纵栏展开其子项。如果Vbox设置了边框和/或填充，则其子项将在填充物中展开。Vbox也会自动调整子项的高度为最佳高度（若可调整）。Vbox还会通过它的fillWidth属性来判定是将子项的宽度调整为Vbox自身的宽度还是最佳宽度（fillWidth默认为真）。Hbox的运行方式类似于Vbox但前者不是垂直地而是水平地展开子项。     
+&emsp;&emsp;现在我们可以在Vbox中添加一个新的复选框，修改其text为“Show in gray scale”，并设置id（例如“grayscale”）。
 ```
 <CheckBox fx:id="grayscale" text="Show in gray scale" />
-```
-Let’s also add a title to this section by putting a text before our new checkbox, but still inside the VBox. Then, set its
-text to “Controls” (we can find the text element under the Shapes menu).    
-我们还要为这部分添加一个标题，添加方法是在新添加的复选框前面再放置一个新的文本，但这个文本仍然要在原来的Vbox内。在这之后，我们将此文本的内容设定为“Controls”（可以在“形状”菜单下找到“文本要素”这一栏）。
+``` 
+&emsp;&emsp;我们还要为这部分添加一个标题，添加方法是在新添加的复选框前面再放置一个新的text，但这个text仍然要在原来的Vbox内。在这之后，我们将此text的内容设定为“Controls”（可以在“Shapes”菜单下找到“text element”这一栏）。
 ```
 <Text text="Controls" />
-```
-In the Scene Builder we now have:   
-在Scene Builder中，我们现在得到了：
-![NFDM0s.png](https://s1.ax1x.com/2020/06/16/NFDM0s.png)  
+```  
+&emsp;&emsp;在Scene Builder中，我们得到了：
+![NFDM0s.png](https://s1.ax1x.com/2020/06/16/NFDM0s.png)    
 
-The graphic interface is complete for the first task, now we need to work on the controller; in the previous tutorial we
-could control the number of channels displayed on screen with the line:    
-第一个任务的可视界面已经完成，现在我们需要改进控制器；在上一个教程中，我们通过下列这行代码就可以控制显示在屏幕上的信道数：
+&emsp;&emsp;第一个任务的可视界面已经完成。我们目前需要改进controller。在上一个教程中，我们通过下列这行代码可以控制显示在屏幕上的信道数：
 ```
 Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
-```  
-In order to control this conversion with the check box, we have to link the check box with a FXML variable:    
-为了能够通过复选框来控制此转换，我们必须给复选框链接上FXML变量。
+```    
+&emsp;&emsp;为了通过复选框来控制这种转换，我们必须给复选框链接上FXML变量。
 ```
 @FXML  
 private CheckBox grayscale;
 ```  
-Now we can implement the control by adding a simple “if” condition which will perform the conversion only if our
-check box is checked:  
-现在我们只要添加一个简单的if条件就可以实现控制：只有当复选框被选中时if条件才会执行转换。
+&emsp;&emsp;现在我们只要添加一个简单的if条件就可以实现控制：只有当复选框被选中时if条件才会执行转换。
 ```
 if (grayscale.isSelected())  
 {
 Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
 }
 ``` 
-## 4.4  Load an Image and Add it to the Stream
-The next step is to add another check box which, if checked, will trigger the display of an image over the camera stream. Let’s start by adding the image to the project; create a new folder in the root directory of your project and put the image in there. In my project I have a resources folder with a Poli.png image. Go back to Eclipse and refresh your project (you should have the new folder in it). Let’s open the FXML file with Scene Builder and add a new checkbox below the one that controls the stream colors; we have to set the text, the name of the method in the OnAction field and an id. In the code we will have for example:  
-接下来要再添加一个复选框，这个复选框如果被选中图像就会显示在相机流上。具体的方法是首先在项目里添加一个图像，即在项目的根目录里创建一个文件夹然后将图像放到这个文件夹里。那么现在在我的项目里就有一个资源文件夹，这个文件夹带有一张名称为Poli.png的照片。现在回到Eclipse并刷新项目（你的项目里应该包含了新的文件夹）。接下来用Scene Builder打开之前的FXML文件并在控制视频流颜色的复选框下面再添加一个新的复选框。我们需要将它的Text设定为“Show logo”，它在OnAction这一栏填为“Loadlogo”，以及它的id设为“logoCheckBox”。例如代码就会是这样： 
+## 4.4 载入图像并添加到视频流
+&emsp;&emsp;接下来要再添加另一个复选框，这个复选框如果被选中图像就会显示在相机流上。具体的方法是首先在项目里添加一个图像，即在项目的根目录里创建一个文件夹然后将图像放到这个文件夹里。那么在我的项目里目前就有一个资源文件夹，这个文件夹带有一张名称为Poli.png的照片。回到Eclipse并刷新项目（你的项目里应该包含了新的文件夹）。接着用Scene Builder打开之前的FXML文件并在控制视频流颜色的复选框下面再添加一个新的复选框。我们需要将它的Text设定为“Show logo”，它在OnAction这一栏填为“Loadlogo”，以及它的id设为“logoCheckBox”。例如代码就会是这样： 
 ```
 <CheckBox fx:id="logoCheckBox" text="Show logo" onAction="#loadLogo" />
 ```
-In the controller file we have to define a new variable associated with the checkbox, the method set on the OnAction field and adapt the code so that it will display the logo when the checkbox is checked and the stream is on.  
-我们要在controller class这一栏定义一个与“logoCheckbox”相链接的新的变量“Checkbox”并且相应地修改代码以便当复选框被选中且视频流开启时徽标可以显示在屏幕上。  
-**Variable**:  
+&emsp;&emsp;我们要在controller class这一栏定义一个与“logoCheckbox”相链接的新的变量“Checkbox”并且相应地修改代码以便当复选框被选中且视频流开启时徽标可以显示在屏幕上。  
 **变量**：
 ```
 @FXML  
 
 private CheckBox logoCheckBox;
-```
-loadLogo method: In this method we are going to load the image whenever the logoCheckBox id selected (checked).In order to load the image we have to use a basic OpenCV function: imread. It returns a Mat and takes the path of the
-image and a flag (> 0 RGB image, =0 grayscale, <0 with the alpha channel).  
-loadlogo方法：使用这种方法时，只要logoCheckbox这个id被选择（选中），图像就会加载出来。为了载入图像，我们需要使用到一个基本的OpenCV函数——imread。imread在返回矩阵的同时还会获取图像的路径和标记（矩阵> 0，RGB图像；矩阵= 0，灰度图；矩阵<0，图像带有alpha通道）。
+``` 
+&emsp;&emsp;loadlogo方法：每当logoCheckbox这个id被选择（选中）时，图像就要载入。为此，我们需要使用到一个基本的OpenCV函数——imread。imread在返回矩阵的同时还会获取图像的路径和标记（矩阵> 0，载入RGB图像；矩阵= 0，载入灰度图；矩阵<0，载入图像带有alpha通道）。
 ```
 @FXML
 protected void loadLogo()
@@ -111,82 +80,59 @@ protected void loadLogo()
 if (logoCheckBox.isSelected())
 this.logo = Imgcodecs.imread("resources/Poli.png");
 }
-```
-Adapt the code.  
-修改代码。  
+``` 
+&emsp;&emsp;修改代码。  
+  
+&emsp;&emsp;我们之所以要在代码里面添加一些变量是为了让我们的徽标能够出现在视频流的特定区域。也就是说，在每一次帧捕获的图像被转换成单通道或三通道之前，我们都要设定一个ROI（感兴趣的区域，即我们想放置徽标的区域）。一般来说图像的ROI是图像本身的一部分，我们不妨定义ROI为Rect对象。Rect是二维矩形的一个模板类，由以下参数表示：  
 
-We are going to add some variants to the code in order to display our logo in a specific region of the stream. This means that for each frame capture, before the image could be converted into 1 or 3 channels, we have to set a **ROI**(region of interest) in which we want to place the logo. Usually a ROI of an image is a portion of it, we can define the ROI as a Rect object. Rect is a template class for 2D rectangles, described by the following parameters:   
-我们之所以要在代码里面添加一些变量是为了让我们的徽标能够出现在视频流的特定区域。也就是说，在每一次帧捕获的图像被转换成单通道或三通道之前，我们都需要设定一个ROI（感兴趣的区域，即我们想放置徽标的区域）。一般来说图像的ROI是图像本身的一部分，我们不妨定义ROI为Rect对象。Rect是二维矩形的一个模板类，由以下参数表示：  
-
-• Coordinates of the top-left corner. This is a default interpretation of Rect.x and Rect.y in OpenCV. Though, in
-your algorithms you may count x and y from the bottom-left corner.    
 •以左上角为原点的坐标系。这是OpenCV对于Rect.x和Rect.y的一种默认理解。不过在你自己的算法中，还是可以使用以左下角为原点的坐标系的。  
 
-• Rectangle width and height.    
 •矩形的宽度和高度。
 ```
 Rect roi = new Rect(frame.cols()-logo.cols(), frame.rows()-logo.rows(), logo.cols(),
 ˓→ logo.rows());
 ```
-Then we have to take control of our Mat’s ROI, by doing so we are able to “add” our logo in the desired area of the
-frame defined by the ROI.      
-接着我们需要控制被返回的矩阵的ROI，这样一来就可以将徽标放置到帧的理想区域。而帧的理想区域则是由ROI所界定出来的。  
+&emsp;&emsp;接着我们需要控制被返回的矩阵的ROI，由此就可以将徽标放置到帧的理想区域（由ROI所界定）。  
 
 ```
 Mat imageROI = frame.submat(roi);
 ```
-We had to make this operation because we can only “add” Mats with the same sizes; but how can we “add” two Mat together? We have to keep in mind that our logo could have 4 channels (RGB + alpha). So we could use two functions:
-addWeighted or copyTo. The addWeighted function calculates the weighted sum of two arrays as follows:  
-之所以我们要执行上述操作是因为我们现在只能添加同等大小的矩阵。那么怎么样才能添加不同大小的矩阵呢？我们必须牢记的是所要添加的徽标可能有4种通道（RGB以及α通道）。鉴于此我们可以使用addWeighted和copyTo这两个函数。前者（addWeighted）通过如下公式计算两个数组的加权和：  
-dst(I)= saturate(src1(I) alpha + src2(I)* beta + gamma)*  
-
-where I is a multi-dimensional index of array elements. In case of multi-channel arrays, each channel is processed
-independently. The function can be replaced with a matrix expression:    
-式中I代表数组元素的一个多维索引。如果数组为多通道的情况下，每个通道都会被彼此独立地处理。该函数可以用如下的矩阵表达式替换：  
+&emsp;&emsp;之所以我们要执行上述操作是因为我们现在只能添加同等大小的矩阵。那么怎么样才能添加不同大小的矩阵呢？我们必须牢记：所要添加的徽标可能有4种通道（RGB以及α通道）。鉴于此我们可以使用addWeighted和copyTo这两个函数。  
+&emsp;&emsp;前者（addWeighted）通过如下公式计算两个数组的加权和：  
+dst(I)= saturate(src1(I) alpha + src2(I)* beta + gamma)*   
+式中I代表数组元素的一个多维索引。数组为多通道的情况下，每个通道都会被彼此独立地处理。  
+该函数可以用如下的矩阵表达式替换：  
 dst = src1*alpha + src2*beta + gamma  
 
 ---
-**Note**: Saturation is not applied when the output array has the depth CV_32S. You may even get result of an incorrect
-sign in the case of overflow.   
-**注意** :当输出数组其图像元素的位深度为有符号32位整型时，**不涉及到色饱和度**。如果位深度取值溢出的话，甚至可能得到的结果是错误的符号。  
----  
-
-**Parameters**:    
-**参数**： 
+**注意**:
+当输出数组其图像元素的位深度为有符号32位整型时，不涉及到色饱和度。如果位深度取值溢出的话，甚至可能得到错误的符号。 
+---
+**参数**：  
  
-• **src1** first input array.    
-•**src1**：首次输入的数组。
-
-• **alpha** weight of the first array elements.    
+•**src1**：首次输入的数组。  
+   
 •**alpha**：第一数组元素的权重。  
-
-• **src2** second input array of the same size and channel number as src1.    
-• **src2**：第二次输入的数组，其大小、通道数均与首次输入数组的相同。   
-
-• **beta** weight of the second array elements.    
+ 
+• **src2**：第二次输入的数组，其大小、通道数均与首次输入数组的相同。  
+   
 • **beta**：第二数组元素的权重。  
-
-• **gamma** scalar added to each sum.    
+     
 • **gamma**：添加到每组和的标量。  
+   
+• **dst** ：输出的数组，其大小、通道数均与两次输入数组的相同。      
 
-• **dst** output array that has the same size and number of channels as the input arrays.    
-• **dst** ：输出的数组，其大小、通道数均与两次输入数组的相同。  
-
-So we’ll have:    
 因此我们可以得到：
 ```
 Core.addWeighted(imageROI, 1.0, logo, 0.7, 0.0, imageROI);
-```
-The second method (copyTo) simply copies a Mat into the other. We’ll have:    
-后者（copyTo）直接地将一个矩阵复制到另外一个矩阵。我们可以得到：
+```   
+&emsp;&emsp;后者（copyTo）直接地将一个矩阵复制到另外一个矩阵。我们可以得到：
 ```
 Mat mask = logo.clone();  
 
 logo.copyTo(imageROI, mask);
 ```
-Everything we have done so far to add the logo to the image has to perform only IF our checkbox is check and the
-image loading process has ended successfully. So we have to add an if condition:   
-到目前为止我们所做的一切都是为了把徽标添加到图像中去。只有当logoCheckbox复选框被选中且图像最终成功地加载出来，才可以实现我们之前的操作。因此我们必须增加一个if条件：
+&emsp;&emsp;到目前为止我们所做的一切都是为了把徽标添加到图像中去。只有当logoCheckbox复选框被选中且图像最终成功地加载出来，才可以实现我们之前的操作。因此我们必须增加一个if条件：
 ```
 if (logoCheckBox.isSelected() && this.logo != null)  
 {  
