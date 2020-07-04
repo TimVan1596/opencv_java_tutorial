@@ -8,15 +8,15 @@
 
 在本教程中，我们将：  
  
-•创建一个初步的交互复选框，可以修改视频流的颜色；    
+&emsp;&emsp;•创建一个初步的交互复选框，可以修改视频流的颜色；    
   
-•新增一个初步的交互复选框去“透明叠加”一个徽标到视频流中；    
+&emsp;&emsp;•新增一个初步的交互复选框去“透明叠加”一个徽标到视频流中；    
 
-•显示该视频流的直方图（包括单通道和三通道）。
+&emsp;&emsp;•显示该视频流的直方图（包括单通道和三通道）。
 ## 4.2 准备  
 &emsp;&emsp;关于这个教程，我们先来创建一个新的JavaFX项目并在项目中构建一个场景，这个场景要与前面章节已经做出来的相同。这样一来，我们就会得到一个含有子窗口的窗口。在子窗口中：  
   
-•位于底部的Hbox里面有一个“Start Camera”按钮：
+&emsp;&emsp;&emsp;&emsp;•位于底部的Hbox里面有一个“Start Camera”按钮：
 ```
 <HBox alignment="CENTER" >
 <padding>
@@ -26,7 +26,7 @@
 ˓→ #startCamera" />
 </HBox>
 ```
-•位于中央的为视图预览界面：
+&emsp;&emsp;&emsp;&emsp;•位于中央的为视图预览界面：
 ```
 <ImageView fx:id="currentFrame" />
 ```
@@ -66,13 +66,13 @@ Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
 <CheckBox fx:id="logoCheckBox" text="Show logo" onAction="#loadLogo" />
 ```
 &emsp;&emsp;我们要在controller class这一栏定义一个与“logoCheckbox”相链接的新的变量“Checkbox”并且相应地修改代码以便当复选框被选中且视频流开启时徽标可以显示在屏幕上。  
-**变量**：
+&emsp;&emsp;**变量**：
 ```
 @FXML  
 
 private CheckBox logoCheckBox;
 ``` 
-&emsp;&emsp;loadlogo方法：每当logoCheckbox这个id被选择（选中）时，图像就要载入。为此，我们需要使用到一个基本的OpenCV函数——imread。imread在返回矩阵的同时还会获取图像的路径和标记（矩阵> 0，载入RGB图像；矩阵= 0，载入灰度图；矩阵<0，载入图像带有alpha通道）。
+&emsp;&emsp;**loadlogo方法**：每当logoCheckbox这个id被选择（选中）时，图像就要载入。为此，我们需要使用到一个基本的OpenCV函数——imread。imread在返回矩阵的同时还会获取图像的路径和标记（矩阵> 0，载入RGB图像；矩阵= 0，载入灰度图；矩阵<0，载入图像带有alpha通道）。
 ```
 @FXML
 protected void loadLogo()
@@ -85,9 +85,9 @@ this.logo = Imgcodecs.imread("resources/Poli.png");
   
 &emsp;&emsp;我们之所以要在代码里面添加一些变量是为了让我们的徽标能够出现在视频流的特定区域。也就是说，在每一次帧捕获的图像被转换成单通道或三通道之前，我们都要设定一个ROI（感兴趣的区域，即我们想放置徽标的区域）。一般来说图像的ROI是图像本身的一部分，我们不妨定义ROI为Rect对象。Rect是二维矩形的一个模板类，由以下参数表示：  
 
-•以左上角为原点的坐标系。这是OpenCV对于Rect.x和Rect.y的一种默认理解。不过在你自己的算法中，还是可以使用以左下角为原点的坐标系的。  
+&emsp;&emsp;&emsp;&emsp;•以左上角为原点的坐标系。这是OpenCV对于Rect.x和Rect.y的一种默认理解。不过在你自己的算法中，还是可以使用以左下角为原点的坐标系的。  
 
-•矩形的宽度和高度。
+&emsp;&emsp;&emsp;&emsp;•矩形的宽度和高度。
 ```
 Rect roi = new Rect(frame.cols()-logo.cols(), frame.rows()-logo.rows(), logo.cols(),
 ˓→ logo.rows());
@@ -99,30 +99,30 @@ Mat imageROI = frame.submat(roi);
 ```
 &emsp;&emsp;之所以我们要执行上述操作是因为我们现在只能添加同等大小的矩阵。那么怎么样才能添加不同大小的矩阵呢？我们必须牢记：所要添加的徽标可能有4种通道（RGB以及α通道）。鉴于此我们可以使用addWeighted和copyTo这两个函数。  
 &emsp;&emsp;前者（addWeighted）通过如下公式计算两个数组的加权和：  
-dst(I)= saturate(src1(I) alpha + src2(I)* beta + gamma)*   
-式中I代表数组元素的一个多维索引。数组为多通道的情况下，每个通道都会被彼此独立地处理。  
-该函数可以用如下的矩阵表达式替换：  
-dst = src1*alpha + src2*beta + gamma  
+&emsp;&emsp;&emsp;&emsp;dst(I)= saturate(src1(I) alpha + src2(I)* beta + gamma)*   
+&emsp;&emsp;式中I代表数组元素的一个多维索引。数组为多通道的情况下，每个通道都会被彼此独立地处理。  
+&emsp;&emsp;该函数可以用如下的矩阵表达式替换：  
+&emsp;&emsp;&emsp;&emsp;dst = src1*alpha + src2*beta + gamma  
 
 ---
 **注意**:
 当输出数组其图像元素的位深度为有符号32位整型时，不涉及到色饱和度。如果位深度取值溢出的话，甚至可能得到错误的符号。 
 ---
-**参数**：  
+&emsp;&emsp;**参数**：  
  
-•**src1**：首次输入的数组。  
+&emsp;&emsp;&emsp;&emsp;•**src1**：首次输入的数组。  
    
-•**alpha**：第一数组元素的权重。  
+&emsp;&emsp;&emsp;&emsp;•**alpha**：第一数组元素的权重。  
  
-• **src2**：第二次输入的数组，其大小、通道数均与首次输入数组的相同。  
+&emsp;&emsp;&emsp;&emsp;• **src2**：第二次输入的数组，其大小、通道数均与首次输入数组的相同。  
    
-• **beta**：第二数组元素的权重。  
+&emsp;&emsp;&emsp;&emsp;• **beta**：第二数组元素的权重。  
      
-• **gamma**：添加到每组和的标量。  
+&emsp;&emsp;&emsp;&emsp;• **gamma**：添加到每组和的标量。  
    
-• **dst** ：输出的数组，其大小、通道数均与两次输入数组的相同。      
+&emsp;&emsp;&emsp;&emsp;• **dst** ：输出的数组，其大小、通道数均与两次输入数组的相同。      
 
-因此我们可以得到：
+&emsp;&emsp;因此我们可以得到：
 ```
 Core.addWeighted(imageROI, 1.0, logo, 0.7, 0.0, imageROI);
 ```   
