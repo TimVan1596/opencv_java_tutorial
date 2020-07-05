@@ -19,10 +19,10 @@
 &emsp;&emsp;&emsp;&emsp;•位于底部的Hbox里面有一个“Start Camera”按钮：
 ```
 <HBox alignment="CENTER" >
-<padding>
-<Insets top="25" right="25" bottom="25" left="25"/>
-</padding>
-<Button fx:id="button" alignment="center" text="Start camera" onAction="
+   <padding>
+      <Insets top="25" right="25" bottom="25" left="25"/>
+   </padding>
+   <Button fx:id="button" alignment="center" text="Start camera" onAction="
 ˓→ #startCamera" />
 </HBox>
 ```
@@ -57,7 +57,7 @@ private CheckBox grayscale;
 ```
 if (grayscale.isSelected())  
 {
-Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
+   Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
 }
 ``` 
 ## 4.4 载入图像并添加到视频流
@@ -69,7 +69,6 @@ Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
 &emsp;&emsp;**变量**：
 ```
 @FXML  
-
 private CheckBox logoCheckBox;
 ``` 
 &emsp;&emsp;**loadlogo方法**：每当logoCheckbox这个id被选择（选中）时，图像就要载入。为此，我们需要使用到一个基本的OpenCV函数——imread。imread在返回矩阵的同时还会获取图像的路径和标记（矩阵> 0，载入RGB图像；矩阵= 0，载入灰度图；矩阵<0，载入图像带有alpha通道）。
@@ -77,8 +76,8 @@ private CheckBox logoCheckBox;
 @FXML
 protected void loadLogo()
 {
-if (logoCheckBox.isSelected())
-this.logo = Imgcodecs.imread("resources/Poli.png");
+ if (logoCheckBox.isSelected())
+    this.logo = Imgcodecs.imread("resources/Poli.png");
 }
 ``` 
 &emsp;&emsp;修改代码。  
@@ -129,22 +128,21 @@ Core.addWeighted(imageROI, 1.0, logo, 0.7, 0.0, imageROI);
 &emsp;&emsp;后者（copyTo）直接地将一个矩阵复制到另外一个矩阵。我们可以得到：
 ```
 Mat mask = logo.clone();  
-
 logo.copyTo(imageROI, mask);
 ```
 &emsp;&emsp;到目前为止我们所做的一切都是为了把徽标添加到图像中去。只有当logoCheckbox复选框被选中且图像最终成功地加载出来，才可以实现我们之前的操作。因此我们必须增加一个if条件：
 ```
 if (logoCheckBox.isSelected() && this.logo != null)  
 {  
-Rect roi = new Rect(frame.cols() - logo.cols(), frame.rows() - logo.rows(), logo.
+    Rect roi = new Rect(frame.cols() - logo.cols(), frame.rows() - logo.rows(), logo.
 ˓→ cols(),logo.rows());  
-Mat imageROI = frame.submat(roi);  
-// add the logo: method #1  
+    Mat imageROI = frame.submat(roi);  
+    // add the logo: method #1  
 
-Core.addWeighted(imageROI, 1.0, logo,   0.7, 0.0, imageROI);  
-// add the logo: method #2  
-// Mat mask = logo.clone();  
-// logo.copyTo(imageROI, mask);  
+    Core.addWeighted(imageROI, 1.0, logo,   0.7, 0.0, imageROI);  
+    // add the logo: method #2  
+   // Mat mask = logo.clone();  
+  // logo.copyTo(imageROI, mask);  
 }
 ```
 ## 4.5 Calculate a Histogram
