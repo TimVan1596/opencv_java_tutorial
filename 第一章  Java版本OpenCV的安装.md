@@ -1,16 +1,28 @@
-## 1.1 Introduction to OpenCV for Java
-As of OpenCV 2.4.4, OpenCV supports desktop Java development. This tutorial will help you install OpenCV on your
-desktop operating system.
+## 1.1 Introduction to OpenCV for Java 
+## 1.1 Java版本的OpenCV介绍
+As of OpenCV 2.4.4, OpenCV supports desktop Java development. This tutorial will help you install OpenCV on your desktop operating system.  
+自OpenCV 2.4.4开始，OpenCV开始支持桌面版Java开发。本手册将会帮助你在桌面版操作系统上安装OpenCV。
 ## 1.2 Install the latest Java version
+## 1.2 安装最新版本的Java
 Download the latest Java JDK from the [Oracle](https://www.oracle.com/java/technologies/javase-downloads.html) website. Now you should be able to install the last Java JDK by opening
-the file just downloaded.
+the file just downloaded.  
+从 [Oracle网站](https://www.oracle.com/java/technologies/javase-downloads.html) 下载最新的Java JDK工具包，然后打开下载好的文件安装最新的Java JDK工具包。
 ## 1.3 Install the latest Eclipse version
+## 1.3 安装最新版本的Eclipse
 Download the latest Eclipse version at the [Eclipse Download page](https://www.eclipse.org/downloads/packages/) choosing the **Eclipse IDE for Java Developers** version (suggested).  
+在[Eclipse 下载页](https://www.eclipse.org/downloads/packages/) 选择并下载最新的**Eclipse IDE for Java Developers** 版本 (推荐)。 
   
-Extract the downloaded compressed file and put the resulting folder wherever you want to. You don’t need to install anything. Alternatively, you can try the Eclipse installer.
-## 1.4 Install OpenCV 3.x under Windows
-First of all you should download the OpenCV library (version 3.x) from [here](https://opencv.org/releases/).
-Then, extract the downloaded OpenCV file in a location of your choice. Once you get the folder **opencv** put in wherever you prefer.Now the only two things that you will need are: the **opencv-3xx**.jar file located at **\opencv\build\java** and the **opencv_java3xx.dll** library located at **\opencv\build\java\x64** (for 64-bit systems) or **\opencv\build\java\x86** (for 32-bit systems). The _3xx_ suffix of each file is a shortcut for the current OpenCV version, e.g., it will be _300_ for OpenCV 3.0 and _330_ for OpenCV 3.3.
+Extract the downloaded compressed file and put the resulting folder wherever you want to. You don’t need to install anything. Alternatively, you can try the Eclipse installer.  
+解压下载好的压缩文件并保存解压得到的文件夹。你不需要安装任何东西。或者，你也可以尝试Eclipse安装程序。
+## 1.4 Install OpenCV 3.x under Windows Windows系统下安装OpenCV 3.x
+First of all you should download the OpenCV library (version 3.x) from [here](https://opencv.org/releases/).  
+首先从[这里](https://opencv.org/releases/)下载OpenCV库（3.x版本）。  
+
+Then, extract the downloaded OpenCV file in a location of your choice. Once you get the folder **opencv** put in wherever you prefer.  
+然后解压已下载的OpenCV文件到你选择的位置并保存解压后的**opencv**文件夹。  
+  
+Now the only two things that you will need are: the **opencv-3xx.jar** file located at **\opencv\build\java** and the **opencv_java3xx.dll** library located at **\opencv\build\java\x64** (for 64-bit systems) or **\opencv\build\java\x86** (for 32-bit systems). The _3xx_ suffix of each file is a shortcut for the current OpenCV version, e.g., it will be _300_ for OpenCV 3.0 and _330_ for OpenCV 3.3.  
+接下来你只需要两份文件：位于**\opencv\build\java**的**opencv-3xx.jar**文件以及位于**\opencv\build\java\x64**的**opencv_java3xx.dll**库（64位系统）或位于**\opencv\build\java\x8**的**opencv_java3xx.dll**库（32位系统）。每份文件名称中的*3xx*后缀都是关于当前OpenCV版本的快捷方式。例如，对于OpenCV 3.0后缀为*300*；对于OpenCV 3.3后缀为*330*。
 ## 1.5 Install OpenCV 3.x under macOS
 The quickest way to obtain OpenCV under macOS is to use [Homebrew](https://brew.sh/). After installing Homebrew, you have to check whether the XCode Command Line Tools are already installed on your system.  
   
