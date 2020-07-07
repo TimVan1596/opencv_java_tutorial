@@ -22,7 +22,7 @@ Then, extract the downloaded OpenCV file in a location of your choice. Once you 
 &emsp;&emsp;然后解压已下载的OpenCV文件到你选择的位置并保存解压后的**opencv**文件夹。  
   
 Now the only two things that you will need are: the **opencv-3xx.jar** file located at **\opencv\build\java** and the **opencv_java3xx.dll** library located at **\opencv\build\java\x64** (for 64-bit systems) or **\opencv\build\java\x86** (for 32-bit systems). The _3xx_ suffix of each file is a shortcut for the current OpenCV version, e.g., it will be _300_ for OpenCV 3.0 and _330_ for OpenCV 3.3.  
-&emsp;&emsp;接下来你只需要两份文件：位于**\opencv\build\java**的**opencv-3xx.jar**文件以及位于**\opencv\build\java\x64**的**opencv_java3xx.dll**库（64位系统）或位于**\opencv\build\java\x8**的**opencv_java3xx.dll**库（32位系统）。每份文件名称中的*3xx*后缀都是关于当前OpenCV版本的快捷方式。例如，对于OpenCV 3.0后缀为*300*；对于OpenCV 3.3后缀为*330*。
+&emsp;&emsp;接下来你只需要两份文件：位于\opencv\build\java的opencv-3xx.jar文件以及位于\opencv\build\java\x64的opencv_java3xx.dll库（64位系统）或位于\opencv\build\java\x8的opencv_java3xx.dll库（32位系统）。每份文件名称中的*3xx*后缀都是关于当前OpenCV版本的快捷方式。例如，对于OpenCV 3.0后缀为*300*；对于OpenCV 3.3后缀为*330*。
 ## 1.5 Install OpenCV 3.x under macOS macOS下安装OpenCV 3.x
 The quickest way to obtain OpenCV under macOS is to use [Homebrew](https://brew.sh/). After installing Homebrew, you have to check whether the _XCode Command Line Tools_ are already installed on your system.  
 &emsp;&emsp;macOS下安装OpenCV最快的方法就是使用[Homebrew](https://brew.sh/)。Homebrew安装完毕之后，必须检查你的系统是否已经安装了*XCode命令行工具*。
@@ -37,7 +37,7 @@ To install OpenCV (with Java support) through Homebrew, you need to edit the _op
 &emsp;&emsp;为了使用Homebrew来安装Java版本的OpenCV，你需要在Homebrew中编辑opencv的公式来添加对Java版本的支持：**brew edit opencv**。打开文本编辑器，修改以下行：**-DBUILD_opencv_java=OFF in -DBUILD_opencv_java=ON**。保存文件后，即可安装OpenCV：**brew install --build-from-source opencv**。  
 
 After the installation of OpenCV, the needed jar file and the dylib library will be located at **/usr/local/Cellar/opencv/3.x.x/share/OpenCV/java/**, e.g., **/usr/local/Cellar/opencv/3.3.1/share/OpenCV/java/**.  
-&emsp;&emsp;OpenCV完成安装后，所需的jar文件和dylib库将位于**/usr/local/Cellar/opencv/3.x.x/share/OpenCV/java/**（比如**/usr/local/Cellar/opencv/3.3.1/share/OpenCV/java/**）。
+&emsp;&emsp;OpenCV完成安装后，所需的jar文件和dylib库将位于 **/usr/local/Cellar/opencv/3.x.x/share/OpenCV/java/** （比如/usr/local/Cellar/opencv/3.3.1/share/OpenCV/java/）。
 
 Please, notice that this method doesn’t work if you update OpenCV from a previous version: you need to uninstall OpenCV and install it again.  
 &emsp;&emsp;请注意：如果你是将OpenCV从较早版本更新到最新版本的，此方法无效！你需要卸载原有的OpenCV并重新安装。
@@ -49,13 +49,13 @@ As first step, download and install [CMake](https://cmake.org/download/) and [Ap
 &emsp;&emsp;第一步，下载并安装[CMake](https://cmake.org/download/)和[Apache Ant](http://ant.apache.org/)。  
 &emsp;&emsp;第二步，下载OpenCV库，下载地址为[OpenCV库网站](https://opencv.org/releases/)。  
 &emsp;&emsp;第三步，解压缩已下载的OpenCV文件到你选好的位置，并打开CMake（cmake-gui）。  
-&emsp;&emsp;第四步，在**“Where is the source code field”** 输入解压出来的OpenCV库所在位置（例如/opencv/）；在**“Where to build the binaries field”**插入构件的目的目录（例如/opencv/build)。  
+&emsp;&emsp;第四步，在 **“Where is the source code field”** 输入解压出来的OpenCV库所在位置（例如/opencv/）；在 **“Where to build the binaries field”** 插入构件的目的目录（例如/opencv/build)。  
 &emsp;&emsp;最后，选中复选框“Grouped”、“Advanced”。  
   
  ![UC6u2d.png](https://s1.ax1x.com/2020/07/06/UC6u2d.png)  
    
  Now press **Configure** and use the default compilers for **Unix Makefiles**. Please, be sure to have installed a C/C++ compiler. In the Ungrouped Entries group, insert the path to the Apache Ant executable (e.g., **/apache-ant-1.9.6/bin/ant**). In the **BUILD** group, unselect:  
- &emsp;&emsp;现在按下“Configure”并使用**Unix Makefiles**的默认编译器。务必确认已经安装C/C++编译器。在“Ungrouped Entries”组，插入路径到Apache Ant可执行文件（比如**/apache-ant-1.9.6/bin/ant**）。在“BUILD”组，取消选择：   
+ &emsp;&emsp;现在按下 **“Configure”** 并使用**Unix Makefiles**的默认编译器。务必确认已经安装C/C++编译器。在 **“Ungrouped Entries”** 组，插入路径到Apache Ant可执行文件（比如**/apache-ant-1.9.6/bin/ant**）。在 **“BUILD”** 组，取消选择：   
  
  • **BUILD_PERF_TESTS**  
  • **BUILD_PERF_TESTS** 
@@ -70,28 +70,28 @@ As first step, download and install [CMake](https://cmake.org/download/) and [Ap
  • **BUILD_opencv_python**  
  
  In the **CMAKE** group, set to **Debug** (or Release) the **CMAKE_BUILD_TYPE**  
- &emsp;&emsp;在“**CMAKE**”组，开始**“Debug”**（或**“Release”**）**“CMAKE_BUILD_TYPE”**。
+ &emsp;&emsp;在“**CMAKE**”组，开始“Debug”（或“Release”）**“CMAKE_BUILD_TYPE”**。
  
  In the **JAVA** group:  
 &emsp;&emsp;在**Java**组：  
 
  • insert the Java AWT include path (e.g., **/usr/lib/jvm/java-1.8.0/include/**)  
- •  插入Java AWT包含路径（例如**/usr/lib/jvm/java-1.8.0/include/**）；
+ •  插入Java AWT包含路径（例如 **/usr/lib/jvm/java-1.8.0/include/** ）；
  
- • insert the Java AWT library path (e.g., **/usr/lib/jvm/java-1.8.0/include/jawt.h**)  
- • 插入Java AWT库路径（例如**/usr/lib/jvm/java-1.8.0/include/jawt.h**）； 
+ • insert the Java AWT library path (e.g.,  **/usr/lib/jvm/java-1.8.0/include/jawt.h** )  
+ • 插入Java AWT库路径（例如 **/usr/lib/jvm/java-1.8.0/include/jawt.h** ）； 
  
- • insert the Java include path (e.g., **/usr/lib/jvm/java-1.8.0/include/**)  
- •插入Java包含路径（例如**/usr/lib/jvm/java-1.8.0/include/**）；  
+ • insert the Java include path (e.g.,  **/usr/lib/jvm/java-1.8.0/include/** )  
+ •插入Java包含路径（例如 **/usr/lib/jvm/java-1.8.0/include/** ）；  
  
  • insert the alternative Java include path (e.g., **/usr/lib/jvm/java-1.8.0/include/linux**)  
- • 插入备用Java包含路径（例如**/usr/lib/jvm/java-1.8.0/include/linux**）；
+ • 插入备用Java包含路径（例如 **/usr/lib/jvm/java-1.8.0/include/linux** ）；
  
  • insert the JVM library path (e.g., **/usr/lib/jvm/java-1.8.0/include/jni.h**)  
- • 插入JYM库路径（例如**/usr/lib/jvm/java-1.8.0/include/jni.h**）。
+ • 插入JYM库路径（例如 **/usr/lib/jvm/java-1.8.0/include/jni.h** ）。
  
  Press **Configure** twice, and the CMake window should appear with a white background. If not, fix the red lines and press **Configure** again. Now, press **Generate** and close CMake.   
- &emsp;&emsp;连按两次**“Configure”**，CMake窗口应显示为白色背景。否则的话，请修复红线，并再按一次**“Configure”**。接下来，请按“Generate”并关闭CMake。  
+ &emsp;&emsp;连按两次 **“Configure”** ，CMake窗口应显示为白色背景。否则的话，请修复红线，并再按一次 **“Configure”** 。接下来，请按 **“Generate”** 并关闭CMake。  
  
  ![UCcFzj.png](https://s1.ax1x.com/2020/07/06/UCcFzj.png)  
   
