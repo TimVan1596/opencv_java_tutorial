@@ -6,6 +6,7 @@ Look at the tutorials on using OpenCV with Java (and JavaFX) at: http://opencv-j
 
 #### 目录
 
+- [第1章 Java版本OpenCV的安装](https://gitee.com/TimVanX/opencv_java_tutorial/blob/master/%E7%AC%AC%E4%B8%80%E7%AB%A0%20%20Java%E7%89%88%E6%9C%ACOpenCV%E7%9A%84%E5%AE%89%E8%A3%85.md)
 - [第4章 OpenCV基础](https://gitee.com/TimVanX/opencv_java_tutorial/blob/master/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20OpenCV%E5%9F%BA%E7%A1%80.md)
 
 
