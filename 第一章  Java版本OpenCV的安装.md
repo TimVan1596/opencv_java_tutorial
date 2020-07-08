@@ -29,7 +29,7 @@
 
 &emsp;&emsp;首先，下载并安装[CMake](https://cmake.org/download/)和[Apache Ant](http://ant.apache.org/)。然后下载OpenCV库，下载地址为[OpenCV库网站](https://opencv.org/releases/)。接着解压缩已下载的OpenCV文件到选好的位置，并打开CMake（cmake-gui）。在 **“Where is the source code field”** 输入解压出来的OpenCV库所在位置（例如/opencv/）；在 **“Where to build the binaries field”** 插入构件的目的目录（例如/opencv/build)。最后，选中复选框“Grouped”、“Advanced”。  
   
- ![UC6u2d.png](https://s1.ax1x.com/2020/07/06/UC6u2d.png)  
+ ![UC6u2d.png](https://images.gitee.com/uploads/images/2020/0708/234339_338fa77f_1464254.png)  
      
 &emsp;&emsp;现在按下 **“Configure”** 并使用**Unix Makefiles**的默认编译器。务必确认已经安装C/C++编译器。  
   
@@ -37,31 +37,31 @@
   
 &emsp;&emsp;在 **“BUILD”** 组，取消选择：   
  
-&emsp;&emsp;• **BUILD_PERF_TESTS**  
+&emsp;&emsp;&emsp;&emsp;• **BUILD_PERF_TESTS**  
 
-&emsp;&emsp; •**BUILD_SHARED_LIBRARY**，使动态库完全绑定于Java
+&emsp;&emsp;&emsp;&emsp;• **BUILD_SHARED_LIBRARY**，使动态库完全绑定于Java
  
-&emsp;&emsp;• **BUILD_TESTS**  
+&emsp;&emsp;&emsp;&emsp;• **BUILD_TESTS**  
 
-&emsp;&emsp;• **BUILD_opencv_python**  
+&emsp;&emsp;&emsp;&emsp;• **BUILD_opencv_python**  
   
  &emsp;&emsp;在“**CMAKE**”组，开始“Debug”（或“Release”）**“CMAKE_BUILD_TYPE”**。
  
  &emsp;&emsp;在**Java**组：  
 
-&emsp;&emsp; •  插入Java AWT包含路径（例如 **/usr/lib/jvm/java-1.8.0/include/** ）；
+&emsp;&emsp;&emsp;&emsp; • 插入Java AWT包含路径（例如 **/usr/lib/jvm/java-1.8.0/include/** ）；
 
-&emsp;&emsp; • 插入Java AWT库路径（例如 **/usr/lib/jvm/java-1.8.0/include/jawt.h** ）； 
+&emsp;&emsp;&emsp;&emsp; • 插入Java AWT库路径（例如 **/usr/lib/jvm/java-1.8.0/include/jawt.h** ）； 
   
-&emsp;&emsp; •插入Java包含路径（例如 **/usr/lib/jvm/java-1.8.0/include/** ）；  
+&emsp;&emsp;&emsp;&emsp; • 插入Java包含路径（例如 **/usr/lib/jvm/java-1.8.0/include/** ）；  
    
-&emsp;&emsp; • 插入备用Java包含路径（例如 **/usr/lib/jvm/java-1.8.0/include/linux** ）；
+&emsp;&emsp;&emsp;&emsp; • 插入备用Java包含路径（例如 **/usr/lib/jvm/java-1.8.0/include/linux** ）；
    
-&emsp;&emsp; • 插入JYM库路径（例如 **/usr/lib/jvm/java-1.8.0/include/jni.h** ）。
+&emsp;&emsp;&emsp;&emsp; • 插入JYM库路径（例如 **/usr/lib/jvm/java-1.8.0/include/jni.h** ）。
    
 &emsp;&emsp;连按两次 **“Configure”** ，CMake窗口应显示为白色背景。否则的话，请修复红线，并再按一次 **“Configure”** 。接下来，请按 **“Generate”** 并关闭CMake。  
  
- ![UCcFzj.png](https://s1.ax1x.com/2020/07/06/UCcFzj.png)  
+ ![UCcFzj.png](https://images.gitee.com/uploads/images/2020/0708/234339_2eef6b3c_1464254.png)  
   
  &emsp;&emsp;现在打开终端，转到OpenCV的**build**文件夹，并使用**make-j**命令编译所有内容。**make-j**命令中，*-j*标记是用来指示*make*运行允许工作的最大线程数的，理论上加快了构件速度。   
  &emsp;&emsp;等待过程完成…  
@@ -70,11 +70,11 @@
 ## 1.7 Eclipse中安装Java版本的OpenCV
 &emsp;&emsp;打开Eclipse，选择用户空间。创建用户库，该库应可以支持接下来要创建的所有新项目。转到：**Window > Preferences....**。  
  
- ![UCgx58.png](https://s1.ax1x.com/2020/07/06/UCgx58.png)  
+ ![UCgx58.png](https://images.gitee.com/uploads/images/2020/0708/234336_15a27f96_1464254.png)  
     
 &emsp;&emsp;从菜单导航到**Java > Build Path > User Libraries**下，选择**New....**。键入库名（例如opencv），然后选择最近创建的用户库。点击**Add External JARs...**，从电脑中浏览并选择**opencv-3xx.jar**。添加完毕后，扩展jar文件，选择**Native library location**并点击**Edit....**。 
   
- ![UC2Cvj.png](https://s1.ax1x.com/2020/07/06/UC2Cvj.png)  
+ ![UC2Cvj.png](https://images.gitee.com/uploads/images/2020/0708/234337_794d1e99_1464254.png)  
   
 &emsp;&emsp;选择**External Folder...**，从电脑中浏览并选择包含OpenCV库的文件夹（例如Windows下的**C:\opencv\build\java\x64**）。  
    
@@ -83,4 +83,4 @@
 ## 1.8 其他版本（实验版本）IDE中安装Java版本的OpenCV 
 &emsp;&emsp;如果你正在使用的是IntelliJ，则可以通过VM参数-Djava.library.path=/opencv/build/lib指定库的位置。
 
- 
+ &emsp;
