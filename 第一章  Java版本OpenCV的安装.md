@@ -82,5 +82,3 @@
  
 ## 1.8 其他版本（实验版本）IDE中安装Java版本的OpenCV 
 &emsp;&emsp;如果你正在使用的是IntelliJ，则可以通过VM参数-Djava.library.path=/opencv/build/lib指定库的位置。
-
- &emsp;
