@@ -121,11 +121,11 @@ As first step, download and install [CMake](https://cmake.org/download/) and [Ap
    
  In case of MacOS, if you installed OpenCV _without_ Homebrew, you need to create a soft link with .dylib extension for
  the .so file. E.g., from the terminal, type: **ln -s libopencv_java300.so libopencv_java300.dylib**  
-&emsp;&emsp;MacOS下，如果你*不是通过*Homebrew安装OpenCV的，则需要为.so文件创建一个软连接，连接扩展名为.dylib。例如，从终端输入**ln -s libopencv_java300.so libopencv_java300.dylib**。 
+&emsp;&emsp;MacOS下，如果你 **不是通过** Homebrew安装OpenCV的，则需要为.so文件创建一个软连接，连接扩展名为.dylib。例如，从终端输入**ln -s libopencv_java300.so libopencv_java300.dylib**。 
  
 ## 1.8 Set up OpenCV for Java in other IDEs (experimental)  
 ## 1.8 其他IDE（实验版本）中安装Java版本的OpenCV 
  If you are using IntelliJ, you can specify the location of the library with the VM argument **-Djava.library.path=/opencv/build/lib**.  
-&emsp;&emsp;如果你正在使用的是IntelliJ，可以通过VM参数-Djava.library.path=/opencv/build/lib指定库的位置。
+&emsp;&emsp;如果你正在使用的是IntelliJ，可以通过VM参数 **-Djava.library.path=/opencv/build/lib** 指定库的位置。
 
  
