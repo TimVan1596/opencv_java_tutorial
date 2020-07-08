@@ -14,7 +14,8 @@ Download the latest Eclipse version at the [Eclipse Download page](https://www.e
   
 Extract the downloaded compressed file and put the resulting folder wherever you want to. You don’t need to install anything. Alternatively, you can try the Eclipse installer.  
 &emsp;&emsp;解压下载好的压缩文件并保存解压得到的文件夹。你不需要安装任何东西。或者，你也可以尝试Eclipse安装程序。
-## 1.4 Install OpenCV 3.x under Windows Windows下安装OpenCV 3.x
+## 1.4 Install OpenCV 3.x under Windows     
+## 1.4 Windows下安装OpenCV 3.x
 First of all you should download the OpenCV library (version 3.x) from [here](https://opencv.org/releases/).  
 &emsp;&emsp;首先从[这里](https://opencv.org/releases/)下载OpenCV库（3.x版本）。  
 
@@ -23,7 +24,8 @@ Then, extract the downloaded OpenCV file in a location of your choice. Once you 
   
 Now the only two things that you will need are: the **opencv-3xx.jar** file located at **\opencv\build\java** and the **opencv_java3xx.dll** library located at **\opencv\build\java\x64** (for 64-bit systems) or **\opencv\build\java\x86** (for 32-bit systems). The _3xx_ suffix of each file is a shortcut for the current OpenCV version, e.g., it will be _300_ for OpenCV 3.0 and _330_ for OpenCV 3.3.  
 &emsp;&emsp;接下来你只需要两份文件：位于\opencv\build\java的opencv-3xx.jar文件以及位于\opencv\build\java\x64的opencv_java3xx.dll库（64位系统）或位于\opencv\build\java\x8的opencv_java3xx.dll库（32位系统）。每份文件名称中的*3xx*后缀都是关于当前OpenCV版本的快捷方式。例如，对于OpenCV 3.0后缀为*300*；对于OpenCV 3.3后缀为*330*。
-## 1.5 Install OpenCV 3.x under macOS macOS下安装OpenCV 3.x
+## 1.5 Install OpenCV 3.x under macOS  
+## 1.5 macOS下安装OpenCV 3.x
 The quickest way to obtain OpenCV under macOS is to use [Homebrew](https://brew.sh/). After installing Homebrew, you have to check whether the _XCode Command Line Tools_ are already installed on your system.  
 &emsp;&emsp;macOS下安装OpenCV最快的方法就是使用[Homebrew](https://brew.sh/)。Homebrew安装完毕之后，必须检查你的系统是否已经安装了*XCode命令行工具*。
   
@@ -41,7 +43,8 @@ After the installation of OpenCV, the needed jar file and the dylib library will
 
 Please, notice that this method doesn’t work if you update OpenCV from a previous version: you need to uninstall OpenCV and install it again.  
 &emsp;&emsp;请注意：如果你是将OpenCV从较早版本更新到最新版本的，此方法无效！你需要卸载原有的OpenCV并重新安装。
-## 1.6 Install OpenCV 3.x under Linux Linux下安装OpenCV 3.x
+## 1.6 Install OpenCV 3.x under Linux   
+## 1.6 Linux下安装OpenCV 3.x
 Please, note: the following instructions are also useful if you want to compile OpenCV under Windows or macOS. Linux package management systems (_apt-get, yum, etc._) may provide the needed version of the OpenCV library.  
 &emsp;&emsp;请注意：以下教程同样适用于在Windows或macOS下编译OpenCV。Linux软件包管理系统（_apt-get_、*yum*等）可以提供OpenCV库的所需版本。
 
@@ -95,22 +98,34 @@ As first step, download and install [CMake](https://cmake.org/download/) and [Ap
  
  ![UCcFzj.png](https://s1.ax1x.com/2020/07/06/UCcFzj.png)  
   
- Now open the terminal, go to the **build** folder of OpenCV and compile everything with the command: **make-j**. Notice that the _-j_ flag tells _make_ to run in parallel with the maximum number of allowed job threads, which makes the build theoretically faster. Wait for the process to be completed... If everything went well you should have **opencv-3xx.jar** in the **/opencv/build/bin** directory and **libopencv_java3xx.so** in the **/opencv/build/lib** directory. The _3xx_ suffix of each file is a shortcut for the current OpenCV version, e.g., it will be _300_ for OpenCV 3.0 and _330_ for OpenCV 3.3. This is everything you need.
- ## 1.7 Set up OpenCV for Java in Eclipse
+ Now open the terminal, go to the **build** folder of OpenCV and compile everything with the command: **make-j**. Notice that the _-j_ flag tells _make_ to run in parallel with the maximum number of allowed job threads, which makes the build theoretically faster. Wait for the process to be completed... If everything went well you should have **opencv-3xx.jar** in the **/opencv/build/bin** directory and **libopencv_java3xx.so** in the **/opencv/build/lib** directory. The _3xx_ suffix of each file is a shortcut for the current OpenCV version, e.g., it will be _300_ for OpenCV 3.0 and _330_ for OpenCV 3.3. This is everything you need.  
+ &emsp;&emsp;现在打开终端，转到OpenCV的**build**文件夹，并使用命令**make-j**编译所有内容。  
+ &emsp;&emsp;请注意：*-j*标记指示*make*运行允许工作的最大线程数，理论上加快了构件速度。   
+ &emsp;&emsp;等待过程完成…  
+ &emsp;&emsp;若一切运行顺利，在目录/opencv/build/bin中你将得到opencv-3xx.jar，在目录/opencv/build/lib中你将得到libopencv_java3xx.so。同样地，每份文件名称中的*3xx*后缀都是关于当前OpenCV版本的快捷方式。例如，对于OpenCV 3.0后缀为*300*；对于OpenCV 3.3后缀为*330*。  
+ &emsp;&emsp;以上就是你安装时所需要的一切。
+## 1.7 Set up OpenCV for Java in Eclipse  
+## 1.7 Eclipse中安装Java版本的OpenCV
  Open Eclipse and select a workspace of your choice. Create a User Library, ready to be used on all your next projects:go to **Window > Preferences....**  
+&emsp;&emsp;打开Eclipse，选择用户空间。创建用户库，该库应可以支持接下来要创建的所有新项目。转到：**Window > Preferences....**。  
  
  ![UCgx58.png](https://s1.ax1x.com/2020/07/06/UCgx58.png)  
   
- From the menu navigate under **Java > Build Path > User Libraries** and choose **New....** Enter a name for the library (e.g., opencv) and select the newly created user library. Choose **Add External JARs...**, browse to select **opencv-3xx.jar** from your computer. After adding the jar, extend it, select **Native library location** and press **Edit....**   
+ From the menu navigate under **Java > Build Path > User Libraries** and choose **New....** Enter a name for the library (e.g., opencv) and select the newly created user library. Choose **Add External JARs...**, browse to select **opencv-3xx.jar** from your computer. After adding the jar, extend it, select **Native library location** and press **Edit....**  
+&emsp;&emsp;从菜单导航到**Java > Build Path > User Libraries**下，选择**New....**。键入库名（比如opencv），然后选择最近创建的用户库。点击**Add External JARs...**，从电脑中浏览并选择**opencv-3xx.jar**。添加完毕后，扩展文件，选择**Native library location**并点击**Edit....**。 
   
  ![UC2Cvj.png](https://s1.ax1x.com/2020/07/06/UC2Cvj.png)  
   
  Select **External Folder...** and browse to select the folder containing the OpenCV libraries (e.g.,**C:\opencv\build\java\x64** under Windows).  
+&emsp;&emsp;选择**External Folder...**，从电脑中浏览并选择包含OpenCV库的文件夹（例如Windows下的**C:\opencv\build\java\x64**）。  
    
  In case of MacOS, if you installed OpenCV _without_ Homebrew, you need to create a soft link with .dylib extension for
  the .so file. E.g., from the terminal, type: **ln -s libopencv_java300.so libopencv_java300.dylib**  
+&emsp;&emsp;MacOS下，如果你*不是通过*Homebrew安装OpenCV的，则需要为.so文件创建一个软连接，连接扩展名为.dylib。例如，从终端输入**ln -s libopencv_java300.so libopencv_java300.dylib**。 
  
- ## 1.8 Set up OpenCV for Java in other IDEs (experimental)
- If you are using IntelliJ, you can specify the location of the library with the VM argument **-Djava.library.path=/opencv/build/lib**.
+## 1.8 Set up OpenCV for Java in other IDEs (experimental)  
+## 1.8 其他IDE（实验版本）中安装Java版本的OpenCV 
+ If you are using IntelliJ, you can specify the location of the library with the VM argument **-Djava.library.path=/opencv/build/lib**.  
+&emsp;&emsp;如果你正在使用的是IntelliJ，可以通过VM参数-Djava.library.path=/opencv/build/lib指定库的位置。
 
  
