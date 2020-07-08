@@ -21,17 +21,17 @@ In this guide, we will:
 ## 2.3 Create a New Project
 Open Eclipse and create a new Java project; open the _File_ menu, go to _New_ and click on _Java Project_.  
   
-![UZzyeU.png](https://s1.ax1x.com/2020/07/09/UZzyeU.png)  
+![UeC2B6.png](https://images.gitee.com/uploads/images/2020/0709/003848_6ef99d13_1464254.png) 
   
 In the _New Java Project_ dialog write the name of your project and click on _Finish_.
 ## 2.4 Add a User Library
 If you followed the previous tutorial (_Installing OpenCV for Java_), you should already have the OpenCV library set in your workspace’s user libraries; if not please check out the previous tutorial. Now you should be ready to add the library to your project. Inside Eclipse’s _Package Explorer_ just right-click on your project’s folder and go to _Build Path --> Add Libraries...._  
   
-![UeSEpn.png](https://s1.ax1x.com/2020/07/09/UeSEpn.png)  
+![UeSEpn.png](https://images.gitee.com/uploads/images/2020/0709/003847_67aade7f_1464254.png)  
 
 Select _User Libraries_ and click on _Next_, check the checkbox of the OpenCV library and click _Finish_.  
   
-![UeSr9A.png](https://s1.ax1x.com/2020/07/09/UeSr9A.png)  
+![UeSr9A.png](https://images.gitee.com/uploads/images/2020/0709/003846_63db9134_1464254.png)  
   
 ## 2.5 Create a simple application
 Now add a new Class to your project by right-clicking on your project’s folder and go to _New --> Class_. Write a name of your choice for both the package and the class then click on _Finish_. Now we are ready to write the code of
@@ -72,6 +72,6 @@ import org.opencv.core.Mat;
 
  We can now try to build and run our application by clicking on the Run button. You should have the following output:  
   
- ![UeCpm6.png](https://s1.ax1x.com/2020/07/09/UeCpm6.png)  
+ ![UeCpm6.png](https://images.gitee.com/uploads/images/2020/0709/003846_0e5bf15b_1464254.png)  
    
  The whole source code is available on [GitHub](https://github.com/opencv-java/getting-started/tree/master/HelloCV).
