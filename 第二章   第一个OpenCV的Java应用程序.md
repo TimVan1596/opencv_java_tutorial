@@ -38,18 +38,23 @@ In the _New Java Project_ dialog write the name of your project and click on _Fi
 在弹出的“New Java Project”对话框中，输入新建Java项目名称并点击“Finish”。
 ## 2.4 Add a User Library
 ## 2.4 添加用户库
-If you followed the previous tutorial (_Installing OpenCV for Java_), you should already have the OpenCV library set in your workspace’s user libraries; if not please check out the previous tutorial. Now you should be ready to add the library to your project. Inside Eclipse’s _Package Explorer_ just right-click on your project’s folder and go to _Build Path --> Add Libraries...._ 
-如果你是从第一章（Java版本OpenCV的安装）看过来的，你应该已经在你的工作空间
+If you followed the previous tutorial (_Installing OpenCV for Java_), you should already have the OpenCV library set in your workspace’s user libraries; if not please check out the previous tutorial. Now you should be ready to add the library to your project. Inside Eclipse’s _Package Explorer_ just right-click on your project’s folder and go to _Build Path --> Add Libraries...._  
+如果你是从第一章（Java版本OpenCV的安装）看过来的，则应该已经在你的工作空间的用户库中设置了OpenCV库；如果不是，请查看前面教程。现在请准备将用户库添加到你新建的Java项目中，具体操作如下：  
+首先找到Eclipse的“Package Explorer”，在这之下，右键单击“My FirstProject”，转到*Build Path --> Add Libraries....*。
   
 ![UeSEpn.png](https://images.gitee.com/uploads/images/2020/0709/003847_67aade7f_1464254.png)  
 
-Select _User Libraries_ and click on _Next_, check the checkbox of the OpenCV library and click _Finish_.  
+Select _User Libraries_ and click on _Next_, check the checkbox of the OpenCV library and click _Finish_.   
+然后选择“User Libraries”，点击“Next”，选中OpenCV库的复选框并点击“Finish”。 
   
 ![UeSr9A.png](https://images.gitee.com/uploads/images/2020/0709/003846_63db9134_1464254.png)  
   
 ## 2.5 Create a simple application
+## 2.5 创建简单的应用程序
 Now add a new Class to your project by right-clicking on your project’s folder and go to _New --> Class_. Write a name of your choice for both the package and the class then click on _Finish_. Now we are ready to write the code of
-our first application. Let’s start by defining the **main** method:  
+our first application. Let’s start by defining the **main** method:   
+先右键单击项目文件夹为你的项目新增一个Class，然后转到*New --> Class*，输入名称（此名称既是Package名也是Class名）。  
+接下来编写第一个应用程序的代码。首先，定义**主要方法**：
 ```  
 public class HelloCV {
          public static void main(String[] args){  
@@ -60,24 +65,27 @@ public class HelloCV {
 }  
 ```
 First of all we need to load the OpenCV Native Library previously set on our project.  
+在这之中，我们首先要载入之前的OpenCV本地库。
 ```  
 System.loadLibrary(Core.NATIVE_LIBRARY_NAME);  
 ```
 Then we can define a new Mat.   
-
+然后才能定义一个新的矩阵。
 ---
 **Note**: The class **Mat** represents an n-dimensional dense numerical single-channel or multi-channel array. It can be used to store real or complex-valued vectors and matrices, grayscale or color images, voxel volumes, vector fields,point clouds, tensors, histograms. For more details check out the OpenCV [page](http://docs.opencv.org/3.0.0/dc/d84/group__core__basic.html).   
-
+**注意**：矩阵Class表示n维密集数值的单通道或多通道数列。它可以用于存储实值矢量、复值矢量、矩阵、灰度图、彩色图、体素模型、矢量场、点云、张量以及直方图等。详情请看[OpenCV页面](http://docs.opencv.org/3.0.0/dc/d84/group__core__basic.html)。
 ---
  
 ```  
 Mat mat = Mat.eye(3, 3, CvType.CV_8UC1);
 ```  
 
-The _Mat.eye_ represents a identity matrix, we set the dimensions of it (3x3) and the type of its elements.   
+The _Mat.eye_ represents a identity matrix, we set the dimensions of it (3x3) and the type of its elements.  
+*Mat.eye*代表一个单位矩阵，我们设其尺寸为3x3、元素类型为CV_8UC1。   
   
-As you can notice, if you leave the code just like this, you will get some error; this is due to the fact that eclipse can’t resolve some variables. You can locate your mouse cursor on the words that seem to be errors and wait for a dialog to pop up and click on the voice **Import....** If you do that for all the variables we have added to the code the following
-rows:  
+As you can notice, if you leave the code just like this, you will get some error; this is due to the fact that eclipse can’t resolve some variables. You can locate your mouse cursor on the words that seem to be errors and wait for a dialog to pop up and click on the voice **Import....** If you do that for all the variables we have added to the code the following rows:  
+如果你就这样完成代码，如你所见你会得到错误输出，这是因为Eclipse无法自动解析某些变量。你可以将光标放在看似错误的单词上，等待对话框弹出并单击“voice **Import**”。对所有变量一一处理之后，我们就已经为代码添上了下列行：
+ 
 ```
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -85,7 +93,9 @@ import org.opencv.core.Mat;
 ```  
 
  We can now try to build and run our application by clicking on the Run button. You should have the following output:  
+ 现在我们不妨试着单击“Run”按钮来构建运行应用程序。输出应如下：    
   
  ![UeCpm6.png](https://images.gitee.com/uploads/images/2020/0709/003846_0e5bf15b_1464254.png)  
    
- The whole source code is available on [GitHub](https://github.com/opencv-java/getting-started/tree/master/HelloCV).
+ The whole source code is available on [GitHub](https://github.com/opencv-java/getting-started/tree/master/HelloCV).  
+ 源代码均可在[GitHub](https://github.com/opencv-java/getting-started/tree/master/HelloCV)找到。
