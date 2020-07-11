@@ -70,11 +70,11 @@
  &emsp;&emsp;若一切运行顺利，在目录/opencv/build/bin中你将得到opencv-3xx.jar、在目录/opencv/build/lib中你将得到libopencv_java3xx.so。同样地，每份文件名称中的*3xx*后缀都是关于当前OpenCV版本的快捷方式。例如，对于OpenCV 3.0后缀为*300*；对于OpenCV 3.3后缀为*330*。  
  &emsp;&emsp;以上就是你安装时所需要的一切。
 ## 1.7 Eclipse中安装Java版本的OpenCV
-&emsp;&emsp;打开Eclipse，选择用户空间。创建用户库，该库应可以支持接下来要创建的所有新项目。转到：**Window > Preferences....**。  
+&emsp;&emsp;打开Eclipse，选择一个用户空间。创建用户库，该库应可以支持接下来要创建的所有新项目。转到：**Window > Preferences....**。  
  
  ![UCgx58.png](https://images.gitee.com/uploads/images/2020/0708/234336_15a27f96_1464254.png)  
     
-&emsp;&emsp;从菜单导航到**Java > Build Path > User Libraries**下，选择**New....**。键入库名（例如opencv），然后选择最近创建的用户库。点击**Add External JARs...**，从电脑中浏览并选择**opencv-3xx.jar**。添加完毕后，扩展jar文件，选择**Native library location**并点击**Edit....**。 
+&emsp;&emsp;从菜单导航到**Java > Build Path > User Libraries**下，选择**New....**。键入库名（例如opencv），然后选择刚刚创建的用户库。点击**Add External JARs...**，从电脑中浏览并选择**opencv-3xx.jar**。添加完毕后，扩展jar文件，选择**Native library location**并点击**Edit....**。 
   
  ![UC2Cvj.png](https://images.gitee.com/uploads/images/2020/0708/234337_794d1e99_1464254.png)  
   
