@@ -18,7 +18,7 @@ In this guide, we will:
 &emsp;&emsp;•新建一个Java项目；  
             
 &emsp;&emsp;• Add a User Library to the project  
-&emsp;&emsp;•为新创建的Java项目添加一个用户库；  
+&emsp;&emsp;•为新建的Java项目添加一个用户库；  
             
 &emsp;&emsp;• Write some OpenCV code  
 &emsp;&emsp;•编写OpenCV代码；  
@@ -29,7 +29,7 @@ In this guide, we will:
 ## 2.3 Create a New Project
 ## 2.3 新建Java项目
 Open Eclipse and create a new Java project; open the _File_ menu, go to _New_ and click on _Java Project_.   
-打开Eclipse并创建一个新的Java项目，具体操作如下：  
+打开Eclipse并新建一个Java项目，具体操作如下：  
 打开“File”菜单，转到“New”并点击“Java Project”。
   
 ![UeC2B6.png](https://images.gitee.com/uploads/images/2020/0709/003848_6ef99d13_1464254.png) 
@@ -39,7 +39,7 @@ In the _New Java Project_ dialog write the name of your project and click on _Fi
 ## 2.4 Add a User Library
 ## 2.4 添加用户库
 If you followed the previous tutorial (_Installing OpenCV for Java_), you should already have the OpenCV library set in your workspace’s user libraries; if not please check out the previous tutorial. Now you should be ready to add the library to your project. Inside Eclipse’s _Package Explorer_ just right-click on your project’s folder and go to _Build Path --> Add Libraries...._  
-如果你是从第一章（Java版本OpenCV的安装）看过来的，则应该已经在你的工作空间的用户库中设置了OpenCV库；如果不是，请查看前面教程。现在请准备将用户库添加到你新建的Java项目中，具体操作如下：  
+如果你是从第一章（Java版本OpenCV的安装）看过来的，则在你的工作空间的用户库中已经设置了OpenCV库；如果不是，请查看前面教程。现在请准备将用户库添加到你新建的Java项目中，具体操作如下：  
 首先找到Eclipse的“Package Explorer”，在这之下，右键单击“My FirstProject”，转到*Build Path --> Add Libraries....*。
   
 ![UeSEpn.png](https://images.gitee.com/uploads/images/2020/0709/003847_67aade7f_1464254.png)  
