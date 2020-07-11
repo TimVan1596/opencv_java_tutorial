@@ -37,8 +37,6 @@
 ![UeSr9A.png](https://images.gitee.com/uploads/images/2020/0709/003846_63db9134_1464254.png)  
   
 ## 2.5 创建简单的应用程序
-Now add a new Class to your project by right-clicking on your project’s folder and go to _New --> Class_. Write a name of your choice for both the package and the class then click on _Finish_. Now we are ready to write the code of
-our first application. Let’s start by defining the **main** method:   
 &emsp;&emsp;右键单击项目文件夹为你的项目新增一个类，然后转到*New --> Class*，输入名称（此名称既是包名也是类名）。   
 &emsp;&emsp;接下来编写第一个应用程序的代码。  
 &emsp;&emsp;&emsp;&emsp;•首先，定义**main**方法：
@@ -80,5 +78,4 @@ import org.opencv.core.Mat;
   
  ![UeCpm6.png](https://images.gitee.com/uploads/images/2020/0709/003846_0e5bf15b_1464254.png)  
    
- The whole source code is available on [GitHub](https://github.com/opencv-java/getting-started/tree/master/HelloCV).  
  &emsp;&emsp;源代码均可在[GitHub](https://github.com/opencv-java/getting-started/tree/master/HelloCV)找到。
