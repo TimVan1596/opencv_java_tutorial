@@ -5,34 +5,52 @@
 [https://github.com/opencv-java/](https://github.com/opencv-java/)找到源代码和资源。
 ---  
 ## 3.1 A JavaFX application with OpenCV
+## 3.1 OpenCV的JavaFX应用程序
 This tutorial will guide you through the creation of a simple JavaFX GUI application using the OpenCV library in Eclipse.  
+本教程将指导你使用Eclipse中的OpenCV库来创建一个简单的JavaFX GUI应用程序。
 
 ## 3.2 What we will do in this tutorial
+## 3.2 在本教程中要做什么
 In this guide, we will:  
+在本教程中，我们将：  
+
 &emsp;&emsp;• Install the **e(fx)clipse** plugin and (optionally) _Scene Builder_.  
+&emsp;&emsp;•安装**e(fx)clipse**插件*和Scene Builder*（Scene Builder安装不做硬性要求）；  
+
 &emsp;&emsp;• Work with **Scene Builder**.  
+&emsp;&emsp;•使用Scene Builder;
+
 &emsp;&emsp;• Write and Run our application.  
+&emsp;&emsp;•编写并运行应用程序 
 
 ## 3.3 Your First Application in JavaFX
-The application you will write by following this tutorial is going to capture a video stream from a webcam and, then,it will display it on the user interface (GUI). We will create the GUI with Scene Builder: it is will have a button, which will allow us to start and stop the stream, and a simple image view container where we will put each stream frame.
+## 3.3 JavaFX中的第一个应用程序
+The application you will write by following this tutorial is going to capture a video stream from a webcam and, then,it will display it on the user interface (GUI). We will create the GUI with Scene Builder: it is will have a button, which will allow us to start and stop the stream, and a simple image view container where we will put each stream frame.  
+&emsp;&emsp;按照本教程编写出来的应用程序将捕获来自网络摄像机的视频流并将其显示在图形用户界面（GUI）上。我们是使用Scene Builder来创建GUI的。创建完毕后，GUI中将包含一个按钮和一个简单的图像视图框，前者用于播放/关闭视频流，后者用于放置视频流帧。
 ## 3.4 Installing e(fx)clipse plugin and Scene Builder
-In Eclipse, install the **e(fx)clipse** plugin, by following the guide at [http://www.eclipse.org/efxclipse/install.html#fortheambitious](http://www.eclipse.org/efxclipse/install.html#fortheambitious). If you choose not to install such a plugin, you have to create a traditional **Java project**, only. Download and install _JavaFX Scene Builder 2.0_ from[http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html](http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html).
+## 3.4 安装e(fx)clipse插件和Scene Builder
+In Eclipse, install the **e(fx)clipse** plugin, by following the guide at [http://www.eclipse.org/efxclipse/install.html#fortheambitious](http://www.eclipse.org/efxclipse/install.html#fortheambitious). If you choose not to install such a plugin, you have to create a traditional **Java project**, only. Download and install _JavaFX Scene Builder 2.0_ from[http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html](http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html).  
+&emsp;&emsp;在Eclipse中安装**e(fx)clipse**插件，请按照本教程操作，详见[http://www.eclipse.org/efxclipse/install.html#fortheambitious](http://www.eclipse.org/efxclipse/install.html#fortheambitious)。如果不想安装此类插件，只需创建一个惯用的**Java项目**——*JavaFX Scene Builder 2.0*即可。请从[http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html](http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html)下载安装*JavaFX Scene Builder 2.0*。
   
 Now you can create a new JavaFX project. Go to **File > New > Project...** and select **JavaFX
 project....**  
-  
+&emsp;&emsp;接下来新建一个JavaFX项目，具体操作为：  
+&emsp;&emsp;&emsp;&emsp;•转到“File > New > Project...”并选择“JavaFX project....”； 
 ![U8Puid.png](https://s1.ax1x.com/2020/07/12/U8Puid.png)  
   
 Choose a name for your project and click _Next_.  
+&emsp;&emsp;&emsp;&emsp;•输入项目名（名称任选），单击“Next”；  
   
 ![U8P7wD.png](https://s1.ax1x.com/2020/07/12/U8P7wD.png)  
   
 Now add your OpenCV user library to your project and click _Next_.  
+&emsp;&emsp;&emsp;&emsp;•添加OpenCV用户库到刚刚创建的项目，单击“Next”；  
   
 ![U8iv4J.png](https://s1.ax1x.com/2020/07/12/U8iv4J.png)  
   
 Choose a name for your package, for the _FXML file_ and for the _Controller Class_. The _FXML file_ will contain the description of your GUI in FXML language, while the _Controller Class_ will handle all the method and event which
 have to be called and managed when the user interacts with the GUI’s components.  
+&emsp;&emsp;&emsp;&emsp;•分别选定Package名称、*FXML文件*名称以及*控制器类*名称。FXML文件将含有你的GUI的FXML语言描述，而控制器类将处理方法和事件
   
 ## 3.5 Working with Scene Builder
 If you have installed _Scene Builder_ you can now right click on your _FXML file_ in Eclipse and select **Open with SceneBuilder**. _Scene Builder_ can help construct you gui by interacting with a graphic interface; this allows you to see a real time preview of your window and modify your components and their position just by editing the graphic preview. Let’s take a look at what I’m talking about. At fist the _FXML file_ will have just an _AnchorPane_. An AnchorPane allows the edges of child nodes to be anchored to an offset from the anchorpane’s edges. If the anchorpane
