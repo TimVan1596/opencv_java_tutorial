@@ -50,26 +50,35 @@ Now add your OpenCV user library to your project and click _Next_.
   
 Choose a name for your package, for the _FXML file_ and for the _Controller Class_. The _FXML file_ will contain the description of your GUI in FXML language, while the _Controller Class_ will handle all the method and event which
 have to be called and managed when the user interacts with the GUI’s components.  
-&emsp;&emsp;&emsp;&emsp;•分别选定Package名称、*FXML文件*名称以及*控制器类*名称。FXML文件将含有你的GUI的FXML语言描述，而控制器类将处理方法和事件
+&emsp;&emsp;&emsp;&emsp;•分别选定Package名称、*FXML文件*名称以及*控制器类*名称。对此GUI的描述将以FXML语言的形式包含在FXML文件中。而GUI组件与用户交互时所必须调用、管理的方法和事件都将由控制器类处理。
   
 ## 3.5 Working with Scene Builder
-If you have installed _Scene Builder_ you can now right click on your _FXML file_ in Eclipse and select **Open with SceneBuilder**. _Scene Builder_ can help construct you gui by interacting with a graphic interface; this allows you to see a real time preview of your window and modify your components and their position just by editing the graphic preview. Let’s take a look at what I’m talking about. At fist the _FXML file_ will have just an _AnchorPane_. An AnchorPane allows the edges of child nodes to be anchored to an offset from the anchorpane’s edges. If the anchorpane
-has a border and/or padding set, the offsets will be measured from the inside edge of those insets. The anchorpane lays out each managed child regardless of the child’s visible property value; unmanaged children are ignored for all
-layout calculations. You can go ahead and delete the anchorpane and add a _BorderPane_ instead. A BorderPane lays out children in top, left, right, bottom, and center positions.  
+## 3.5 使用Scene Builder
+If you have installed _Scene Builder_ you can now right click on your _FXML file_ in Eclipse and select **Open with SceneBuilder**.  
+如果之前已经安装过*Scene Builder*，就可以直接在Eclipse中右键单击FXML文件并选择“Open with SceneBuilder”。  
+ 
+ _Scene Builder_ can help construct you gui by interacting with a graphic interface; this allows you to see a real time preview of your window and modify your components and their position just by editing the graphic preview.  
+ Scene Builder是通过与图形界面交互来帮助构建你的GUI的。这样一来，你就可以实时预览你的窗口效果。此外，只需编辑“图形预览”即可实现GUI组件内容的修改以及位置的调整。  
   
+   Let’s take a look at what I’m talking about.  
+  
+   
+   At fist the _FXML file_ will have just an _AnchorPane_. An AnchorPane allows the edges of child nodes to be anchored to an offset from the anchorpane’s edges. If the anchorpane
+has a border and/or padding set, the offsets will be measured from the inside edge of those insets. The anchorpane lays out each managed child regardless of the child’s visible property value; unmanaged children are ignored for all layout calculations. You can go ahead and delete the anchorpane and add a _BorderPane_ instead. A BorderPane lays out children in top, left, right, bottom, and center positions.  
+  *FXML文件*最开始只有一个*AnchorPane*。AnchorPane允许其子节点边缘锚定的位置偏离自身边缘所在的位置。如果AnchorPane设置了边框和（或）填充，偏离距离是要从填充物的内部边缘开始测算的。对于受到管理的子节点，无论它们是否可见，都将被AnchorPane一一展开。而非托管子节点则不会被AnchorPane展开。当然，你也可以删除AnchorPane而添加BorderPane。BorderPane在TOP、LEFT、RIGHT、BOTTOM以及CENTER这5个固定位置展开子节点。
 ![U8k6w8.png](https://s1.ax1x.com/2020/07/12/U8k6w8.png)  
   
 You can add a BorderPane by dragging from the **Container** menu a borderpane and then drop it in the **Hierarchy** menu. Now we can add the button that will allow us to start and stop the stream. Take a button component from the
 **Controls** menu and drop it on the **BOTTOM** field of our BP. As we can see, on the right we will get three menus(Properties, Layout, Code) which are used to customize our selected component. For example we can change text of
 our button in“StartCamera”in the **Text** field under the **Properties** menu and the id of the button(e.g. “start_btn”) in the **fx:id** field under the **Code** menu.  
-  
+ 从**Container**菜单中拽一个BorderPane并将其放到**Hierarchy**菜单中，即可添加一个BorderPane。BorderPane添加完毕后，我们再来添加一个Button,之后它将可以用来播放/关闭视频流。从**Contols**菜单中拽一个Button并将其放到我们刚刚添加的BP（即BorderPane）的**底部**区域。我们可以看到，下图中右边区域有3个菜单（Properties、Layout、Code），用于自定义被选中组件。例如，我们可以在**Properties**菜单下的**Text**区域修改之前添加的Button内容为“StartCamera”，还可以在**Code**菜单下的**fx:id**区域修改Button的id(比如改成“start_btn”)。
 ![U8kzOx.png](https://s1.ax1x.com/2020/07/12/U8kzOx.png)  
   
 ![U8AEpd.png](https://s1.ax1x.com/2020/07/12/U8AEpd.png)  
  
 We are going to need the id of the button later, in order to edit the button properties from our **Controller**'s methods. As you can see our button is too close to the edge of the windows, so we should add some bottom margin to it; to do
 so we can add this information in the **Layout** menu. In order to make the button work, we have to set the name of the method (e.g. “startCamera”) that will execute the action we want to preform in the field **OnAction** under the **Code** menu.  
-  
+ 为了之后能从 
 ![U8EPuq.png](https://s1.ax1x.com/2020/07/12/U8EPuq.png)  
   
 Now, we shall add an _ImageView_ component from the **Controls** menu into the **CENTER** field of our BP. Let’s also edit the id of the image view (e.g. “currentFrame”), and add some margin to it.  
