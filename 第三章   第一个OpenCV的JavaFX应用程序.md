@@ -61,7 +61,7 @@ If you have installed _Scene Builder_ you can now right click on your _FXML file
  Scene Builder是通过与图形界面交互来帮助构建你的GUI的。这样一来，你就可以实时预览你的窗口效果。此外，只需编辑“图形预览”即可实现GUI组件内容的修改以及位置的调整。  
   
    Let’s take a look at what I’m talking about.  
-  
+  让我们来看一下实际操作。
    
    At fist the _FXML file_ will have just an _AnchorPane_. An AnchorPane allows the edges of child nodes to be anchored to an offset from the anchorpane’s edges. If the anchorpane
 has a border and/or padding set, the offsets will be measured from the inside edge of those insets. The anchorpane lays out each managed child regardless of the child’s visible property value; unmanaged children are ignored for all layout calculations. You can go ahead and delete the anchorpane and add a _BorderPane_ instead. A BorderPane lays out children in top, left, right, bottom, and center positions.  
@@ -71,32 +71,39 @@ has a border and/or padding set, the offsets will be measured from the inside ed
 You can add a BorderPane by dragging from the **Container** menu a borderpane and then drop it in the **Hierarchy** menu. Now we can add the button that will allow us to start and stop the stream. Take a button component from the
 **Controls** menu and drop it on the **BOTTOM** field of our BP. As we can see, on the right we will get three menus(Properties, Layout, Code) which are used to customize our selected component. For example we can change text of
 our button in“StartCamera”in the **Text** field under the **Properties** menu and the id of the button(e.g. “start_btn”) in the **fx:id** field under the **Code** menu.  
- 从**Container**菜单中拽一个BorderPane并将其放到**Hierarchy**菜单中，即可添加一个BorderPane。BorderPane添加完毕后，我们再来添加一个Button,之后它将可以用来播放/关闭视频流。从**Contols**菜单中拽一个Button并将其放到我们刚刚添加的BP（即BorderPane）的**底部**区域。我们可以看到，下图中右边区域有3个菜单（Properties、Layout、Code），用于自定义被选中组件。例如，我们可以在**Properties**菜单下的**Text**区域修改之前添加的Button内容为“StartCamera”，还可以在**Code**菜单下的**fx:id**区域修改Button的id(比如改成“start_btn”)。
+ 从**Container**菜单中拽一个BorderPane并将其放到**Hierarchy**菜单中，即可添加一个BorderPane。BorderPane添加完毕后，我们再来添加一个Button,它之后可以用来播放/关闭视频流。从**Contols**菜单中拽一个Button并将其放到我们刚刚添加的BP（即BorderPane）的**底部**区域。我们可以看到，下图中右边区域有3个菜单（Properties、Layout、Code），用于自定义被选中组件。例如，我们可以在**Properties**菜单下的**Text**区域修改之前添加的Button内容为“StartCamera”，还可以在**Code**菜单下的**fx:id**区域修改Button的id(比如改成“start_btn”)。
 ![U8kzOx.png](https://s1.ax1x.com/2020/07/12/U8kzOx.png)  
   
 ![U8AEpd.png](https://s1.ax1x.com/2020/07/12/U8AEpd.png)  
  
-We are going to need the id of the button later, in order to edit the button properties from our **Controller**'s methods. As you can see our button is too close to the edge of the windows, so we should add some bottom margin to it; to do
-so we can add this information in the **Layout** menu. In order to make the button work, we have to set the name of the method (e.g. “startCamera”) that will execute the action we want to preform in the field **OnAction** under the **Code** menu.  
- 为了之后能从 
+We are going to need the id of the button later, in order to edit the button properties from our **Controller**'s methods. As you can see our button is too close to the edge of the windows, so we should add some bottom margin to it; to do so we can add this information in the **Layout** menu. In order to make the button work, we have to set the name of the method (e.g. “startCamera”) that will execute the action we want to preform in the field **OnAction** under the **Code** menu.  
+接下来在从**控件**方法编辑button属性时，我们将需要用到button的id。  
+可以看到，button现在离窗口的距离特别近，因此要为button设置一定的下边距。我们可以在**Layout**菜单中进行相应操作。  
+为了能让button正常运行，我们必须在**Code**菜单下的**OnAction**这一栏设定好方法名称（比如“startCamera”），此处设定的方法将执行我们预想的功能。
 ![U8EPuq.png](https://s1.ax1x.com/2020/07/12/U8EPuq.png)  
   
 Now, we shall add an _ImageView_ component from the **Controls** menu into the **CENTER** field of our BP. Let’s also edit the id of the image view (e.g. “currentFrame”), and add some margin to it.  
-  
+ 然后从**Controls**菜单中拽一个*ImageView*添加到BP的**CENTER**区域中。同样地，为ImageView设置一定的边距并对其id加以修改（比如改成“currentFrame”）。
 ![U8EzdK.png](https://s1.ax1x.com/2020/07/12/U8EzdK.png)  
   
-Finally we have to tell which Controller class will mange the GUI, we can do so by adding our controller class name in the **Controller class** field under the **Controller** menu located in the bottom left corner of the window.    
+Finally we have to tell which Controller class will manage the GUI, we can do so by adding our controller class name in the **Controller class** field under the **Controller** menu located in the bottom left corner of the window.    
+最后，必须指定一个控制器类去管理我们的GUI。为此，需添加我们之前选定的控制器类名称到位于窗口左下方的**Controller**菜单下的**Controller class**这一栏。 
 
 We just created our first GUI by using Scene Builder, if you save the file and return to Eclipse you will notice that some FXML code has been generated automatically.  
-  
+我们刚刚使用Scene Builder创建了我们第一个GUI。如果你现在保存文件回到Eclipse，你会看到Eclipse已经自动生成了某些FXML代码。 
 ## 3.6 Key Concepts in JavaFX
+## 3.6 JavaFX中的一些重要概念
 The **Stage** is where the application will be displayed (e.g., a Windows’ window). A **Scene** is one container of Nodes that compose one “page” of your application. A **Node** is an element in the Scene, with a visual appearance and an interactive behavior. Nodes may be hierarchically nested . In the _Main class_ we have to pass to the _start_ function our _primary stage_:  
- 
+**Stage**：应用程序显示的地方（比如Windows窗口）；  
+**Scene**：即容器，之中包含组成应用程序的节点；  
+**Node**：Scene中的一个元素，具有可视化、可交互的特点。节点可能是以分层嵌套的形式存在于Scene中。  
+Main class中需要将我们的*primary stage*传递给start函数： 
 ```
 public void start(Stage primaryStage)
 ```
 
-and load the fxml file that will populate our stage, the _root element_ of the scene and the controller class:  
+and load the fxml file that will populate our stage, the _root element_ of the scene and the controller class: 
+并且载入FXML文件。该文件将会填充我们的Stage、Scene的*root element*以及控制器类： 
   
 ```
 FXMLLoader loader = new FXMLLoader(getClass().getResource("FXHelloCV.fxml"));
@@ -105,8 +112,10 @@ FXController controller = loader.getController();
 ```  
 
 ## 3.7 Managing GUI Interactions With the Controller Class
+## 3.7 控制器类管理GUI交互
 For our application we need to do basically two thing: control the button push and the refreshment of the image view.
-To do so we have to create a reference between the gui components and a variable used in our controller class:   
+To do so we have to create a reference between the gui components and a variable used in our controller class:  
+关于我们的JavaFX应用程序，我们需要做最基本的两件事：一是控制按下Button；二是控制刷新ImageView。为了实现上述操作，我们需要在GUI组件和控制器类中的变量间创建一个应用：  
  
 ```
 @FXML
@@ -134,6 +143,7 @@ protected void startCamera(ActionEvent event) { ...
 ```  
 
 ## 3.8 Video Capturing
+## 3.8 视频捕获
 Essentially, all the functionalities required for video manipulation is integrated in the VideoCapture class.  
   
 ```
