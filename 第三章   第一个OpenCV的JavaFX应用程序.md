@@ -77,7 +77,7 @@ our button in“StartCamera”in the **Text** field under the **Properties** men
 ![U8AEpd.png](https://s1.ax1x.com/2020/07/12/U8AEpd.png)  
  
 We are going to need the id of the button later, in order to edit the button properties from our **Controller**'s methods. As you can see our button is too close to the edge of the windows, so we should add some bottom margin to it; to do so we can add this information in the **Layout** menu. In order to make the button work, we have to set the name of the method (e.g. “startCamera”) that will execute the action we want to preform in the field **OnAction** under the **Code** menu.  
-接下来在从**控件**方法编辑button属性时，我们将需要用到button的id。  
+接下来在从**控制器**方法编辑button属性时，我们将需要用到button的id。  
 可以看到，button现在离窗口的距离特别近，因此要为button设置一定的下边距。我们可以在**Layout**菜单中进行相应操作。  
 为了能让button正常运行，我们必须在**Code**菜单下的**OnAction**这一栏设定好方法名称（比如“startCamera”），此处设定的方法将执行我们预想的功能。
 ![U8EPuq.png](https://s1.ax1x.com/2020/07/12/U8EPuq.png)  
@@ -115,7 +115,7 @@ FXController controller = loader.getController();
 ## 3.7 控制器类管理GUI交互
 For our application we need to do basically two thing: control the button push and the refreshment of the image view.
 To do so we have to create a reference between the gui components and a variable used in our controller class:  
-关于我们的JavaFX应用程序，我们需要做最基本的两件事：一是控制按下Button；二是控制刷新ImageView。为了实现上述操作，我们需要在GUI组件和控制器类中的变量间创建一个应用：  
+关于我们的JavaFX应用程序，我们需要做最基本的两件事：一是控制按下Button；二是控制刷新ImageView。为了实现上述操作，我们需要在GUI组件和控制器类变量间创建一个引用：  
  
 ```
 @FXML
@@ -125,18 +125,20 @@ private ImageView currentFrame;
 ```  
 
 The **@FXML** tag means that we are linking our variable to an element of the fxml file and the value used to declare the variable has to equal to the id set for that specific element.  
+**@FXML**标签用于链接变量到FXML文件中的某个元素，并且该变量值应等于相链接的元素的id。  
 
 The **@FXML** tag is used with the same meaning for the Actions set under the Code menu in a specific element.  
+**@FXML**标签用于某个元素设定的方法时，功能同上。  
 
 for:  
-  
+对于：  
 ```
 <Button fx:id="button" mnemonicParsing="false" onAction="#startCamera" text="Start
 ˓→ Camera" BorderPane.alignment="CENTER">  
 ```  
 
 we set:  
-  
+我们设置：  
 ```
 @FXML
 protected void startCamera(ActionEvent event) { ...  
@@ -145,14 +147,14 @@ protected void startCamera(ActionEvent event) { ...
 ## 3.8 Video Capturing
 ## 3.8 视频捕获
 Essentially, all the functionalities required for video manipulation is integrated in the VideoCapture class.  
-  
+VideoCapture类基本上已经整合了视频处理所需要的一切函数。  
 ```
 private VideoCapture capture = new VideoCapture();  
 ```  
 
 This on itself builds on the FFmpeg open source library. A video is composed of a succession of images, we refer to these in the literature as frames. In case of a video file there is a frame rate specifying just how long is between two frames. While for the video cameras usually there is a limit of just how many frames they can digitalize per second. In our case we set as frame rate 30 frames per sec. To do so we initialize a timer (i.e., a
 `ScheduledExecutorService`) that will open a background task every 33 _milliseconds_.  
-  
+这是建立在FFmpeg开源库的基础上的。一段视频由若干连续的图像组成，其中这些图像我们称之为帧。视频文件中，用帧率来明确两帧之间的间隔时长。而对于摄像机来说，每秒可数字化的帧数是有限制的。在这里，我们设置帧率为30帧/秒。如何设置？我们需要初始化一个计时器，该计时器每33毫秒将会启动一次后台任务。 
 ```
 Runnable frameGrabber = new Runnable() { ... }
 this.timer = Executors.newSingleThreadScheduledExecutor();
@@ -161,79 +163,95 @@ this.timer = Executors.newSingleThreadScheduledExecutor();
 ```  
 
 To check if the binding of the class to a video source was successful or not use the **isOpened** function:  
+要检查VideoCapture类是否成功绑定了视频源的话，我们使用**isOpened**函数。
   
 ```
 if (this.capture.isOpened()) { ... }  
 ```  
 
-Closing the video is automatic when the objects destructor is called. However, if you want to close it before this you need to call its release function.  
+Closing the video is automatic when the object's destructor is called. However, if you want to close it before this you need to call its release function.   
+调用对象的析构函数时，视频自动关闭。可是如果你想在调用前就关闭视频的话，就需要调用其释放函数了。 
   
 ```
 this.capture.release();  
 ```  
 
-The frames of the video are just simple images. Therefore, we just need to extract them from the VideoCapture object and put them inside a Mat one.  
+The frames of the video are just simple images. Therefore, we just need to extract them from the VideoCapture object and put them inside a Mat one.
+视频帧纯粹就是图像而已。因此，我们只需要将它们从VideoCapture对象中提取出来再放入Mat 1即可。  
   
 ```
 Mat frame = new Mat();  
 ```  
 
-The video streams are sequential. You may get the frames one after another by the read or the overloaded >> operator.  
+The video streams are sequential. You may get the frames one after another by the read or the overloaded >> operator.
+视频流是有顺序的。因此，从“read”或“overloaded >> operator”读取时，帧都是顺次而出。  
   
 ```
 this.capture.read(frame);  
 ```  
 
 Now we are going to convert our image from _BGR_ to _Grayscale_ format. OpenCV has a really nice function to do this kind of transformations:  
+我们还需要将我们的图像从*BGR*格式转换成*灰度*图。OpenCV有一个非常nice的函数可以完成此类转换：
   
 ```
 Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);  
 ```  
 
 **As you can see, cvtColor takes as arguments**:  
+**可以看到，cvtColor是作为参数的：**  
 &emsp;&emsp;• a source image (frame)  
-
+&emsp;&emsp;• 源图像（帧） 
+         
 &emsp;&emsp;• a destination image (frame), in which we will save the converted image.  
+&emsp;&emsp;•目标图像（帧），用来保存转换后的灰度图  
 
 &emsp;&emsp;• an additional parameter that indicates what kind of transformation will be performed. In this case we use
 **COLOR_BGR2GRAY** (because of imread has BGR default channel order in case of color images).  
-
+ &emsp;&emsp;•附加参数，用于指示将要执行何种转换。在这里使用的额外参数是**COLOR_BGR2GRAY** （不使用imread，因为对于彩色图像imread默认使用BGR通道顺序）
+ 
 Now in order to put the captured frame into the ImageView we need to convert the Mat in a Image. We first create a buffer to store the Mat.  
-  
+为了能在ImageView中放入捕获的帧，我们需要将矩阵转换成图像。具体操作如下：  
+首先，我们创建一个缓冲区，用于存储矩阵。  
 ```
 MatOfByte buffer = new MatOfByte();  
 ```  
 
 Then we can put the frame into the buffer by using the **imencode** function:  
-  
+然后，使用**imencode**函数，将捕获的帧放入缓冲区： 
 ```
 Imgcodecs.imencode(".png", frame, buffer);  
 ```  
 
 This encodes an image into a memory buffer. The function compresses the image and stores it in the memory buffer that is resized to fit the result.  
-
+这行代码会将图像编码到内存缓冲区中。       
+**imencode**函数压缩图像并存储到内存缓冲区中，内存缓冲区会自适应压缩后图像的大小。
 ---
 **Note**: **imencode** returns single-row matrix of type **CV_8UC1** that contains encoded image as array of bytes.  
+**注意：** **imencode**函数返回**CV_8UC1**型的单行矩阵，该矩阵包含了被编码成字节数组的图像。
 
 ---  
 
 **It takes three parameters:**  
-
-&emsp;&emsp;• (".png") File extension that defines the output format.  
+**imencode函数用到3个参数：**  
+ 
+&emsp;&emsp;• (".png") File extension that defines the output format.
+&emsp;&emsp;•“.png”，即文件扩展名，用于定义输出格式
 
 &emsp;&emsp;• (frame) Image to be written.  
+&emsp;&emsp;•帧，即待写入图像  
 
 &emsp;&emsp;• (buffer) Output buffer resized to fit the compressed image.   
+&emsp;&emsp;•缓存区，即输出缓存区，可以自适应压缩后图像的大小  
  
 Once we filled the buffer we have to stream it into an Image by using **ByteArrayInputStream**:  
-  
+将捕获的帧放入缓存区后，我们就要用到**ByteArrayInputStream**来流式传输缓存区中被压缩的图像。  
 ```
 new Image(new ByteArrayInputStream(buffer.toArray()));  
 ```  
 
 Now we can put the new image in the ImageView. With _Java 1.8_ we cannot perform an update of a GUI element in a thread that differs from the main thread; so we need to get the new frame in a second thread and refresh our ImageView
 in the main thread:  
-  
+现在我们可以将新的图像放入ImageView。使用Java 1.8时，我们是无法在与主线程不同的线程中更新GUI的元素。因此我们需要从其他的线程中获取新帧，然后在主线程中刷新我们的ImageView。  
 ```
 Image imageToShow = grabFrame();
 Platform.runLater(new Runnable() {
