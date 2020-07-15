@@ -7,7 +7,7 @@
 ## 3.1 A JavaFX application with OpenCV
 ## 3.1 OpenCV的JavaFX应用程序
 This tutorial will guide you through the creation of a simple JavaFX GUI application using the OpenCV library in Eclipse.  
-本教程将指导你使用Eclipse中的OpenCV库来创建一个简单的JavaFX GUI应用程序。
+&emsp;&emsp;本教程将指导你使用Eclipse中的OpenCV库来创建一个简单的JavaFX GUI应用程序。
 
 ## 3.2 What we will do in this tutorial
 ## 3.2 在本教程中要做什么
@@ -26,16 +26,16 @@ In this guide, we will:
 ## 3.3 Your First Application in JavaFX
 ## 3.3 JavaFX中的第一个应用程序
 The application you will write by following this tutorial is going to capture a video stream from a webcam and, then,it will display it on the user interface (GUI). We will create the GUI with Scene Builder: it is will have a button, which will allow us to start and stop the stream, and a simple image view container where we will put each stream frame.  
-&emsp;&emsp;按照本教程编写出来的应用程序将捕获来自网络摄像机的视频流并将其显示在图形用户界面（GUI）上。我们是使用Scene Builder来创建GUI的。创建完毕后，GUI中将包含一个按钮和一个简单的图像视图框，前者用于播放/关闭视频流，后者用于放置视频流帧。
+&emsp;&emsp;按照本教程编写出来的应用程序将捕获来自网络摄像机的视频流并将其显示在图形用户界面（GUI）上。我们是使用Scene Builder来创建GUI的。创建完毕后，GUI将具有一个按钮和一个简单的图像视图框，前者用于播放/关闭视频流，后者用于放置视频流帧。
 ## 3.4 Installing e(fx)clipse plugin and Scene Builder
 ## 3.4 安装e(fx)clipse插件和Scene Builder
 In Eclipse, install the **e(fx)clipse** plugin, by following the guide at [http://www.eclipse.org/efxclipse/install.html#fortheambitious](http://www.eclipse.org/efxclipse/install.html#fortheambitious). If you choose not to install such a plugin, you have to create a traditional **Java project**, only. Download and install _JavaFX Scene Builder 2.0_ from[http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html](http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html).  
-&emsp;&emsp;在Eclipse中安装**e(fx)clipse**插件，请按照本教程操作，详见[http://www.eclipse.org/efxclipse/install.html#fortheambitious](http://www.eclipse.org/efxclipse/install.html#fortheambitious)。如果不想安装此类插件，只需创建一个惯用的**Java项目**——*JavaFX Scene Builder 2.0*即可。请从[http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html](http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html)下载安装*JavaFX Scene Builder 2.0*。
+&emsp;&emsp;请按照本教程的指导在Eclipse中安装**e(fx)clipse**插件，详见[http://www.eclipse.org/efxclipse/install.html#fortheambitious](http://www.eclipse.org/efxclipse/install.html#fortheambitious)。如果不想安装此类插件，只需创建一个惯用的**Java项目**——*JavaFX Scene Builder 2.0*即可。请从[http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html](http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html)下载安装*JavaFX Scene Builder 2.0*。
   
 Now you can create a new JavaFX project. Go to **File > New > Project...** and select **JavaFX
 project....**  
 &emsp;&emsp;接下来新建一个JavaFX项目，具体操作为：  
-&emsp;&emsp;&emsp;&emsp;•转到“File > New > Project...”并选择“JavaFX project....”； 
+&emsp;&emsp;&emsp;&emsp;•转到“File > New > Project...”，选择“JavaFX project....”； 
 ![U8Puid.png](https://s1.ax1x.com/2020/07/12/U8Puid.png)  
   
 Choose a name for your project and click _Next_.  
@@ -50,28 +50,28 @@ Now add your OpenCV user library to your project and click _Next_.
   
 Choose a name for your package, for the _FXML file_ and for the _Controller Class_. The _FXML file_ will contain the description of your GUI in FXML language, while the _Controller Class_ will handle all the method and event which
 have to be called and managed when the user interacts with the GUI’s components.  
-&emsp;&emsp;&emsp;&emsp;•分别选定Package名称、*FXML文件*名称以及*控制器类*名称。对此GUI的描述将以FXML语言的形式包含在FXML文件中。而GUI组件与用户交互时所必须调用、管理的方法和事件都将由控制器类处理。
+&emsp;&emsp;&emsp;&emsp;•分别选定Package名称、*FXML文件*名称以及*控制器类*名称。关于你创建的GUI的描述将以FXML语言的形式包含在FXML文件中。而GUI组件与用户交互时所必须调用、管理的方法和事件都将由控制器类处理。
   
 ## 3.5 Working with Scene Builder
 ## 3.5 使用Scene Builder
 If you have installed _Scene Builder_ you can now right click on your _FXML file_ in Eclipse and select **Open with SceneBuilder**.  
-如果之前已经安装过*Scene Builder*，就可以直接在Eclipse中右键单击FXML文件并选择“Open with SceneBuilder”。  
+&emsp;&emsp;如果之前已经安装过*Scene Builder*，就可以直接在Eclipse中右键单击FXML文件并选择“Open with SceneBuilder”。  
  
  _Scene Builder_ can help construct you gui by interacting with a graphic interface; this allows you to see a real time preview of your window and modify your components and their position just by editing the graphic preview.  
- Scene Builder是通过与图形界面交互来帮助构建你的GUI的。这样一来，你就可以实时预览你的窗口效果。此外，只需编辑“图形预览”即可实现GUI组件内容的修改以及位置的调整。  
+ &emsp;&emsp;Scene Builder是通过与图形界面交互来帮助构建你的GUI的。这样一来，你就可以实时预览你的窗口效果。此外，只需编辑“图形预览”即可实现GUI组件内容的修改以及位置的调整。  
   
    Let’s take a look at what I’m talking about.  
-  让我们来看一下实际操作。
+ &emsp;&emsp;让我们来看一下具体怎么做。
    
    At fist the _FXML file_ will have just an _AnchorPane_. An AnchorPane allows the edges of child nodes to be anchored to an offset from the anchorpane’s edges. If the anchorpane
 has a border and/or padding set, the offsets will be measured from the inside edge of those insets. The anchorpane lays out each managed child regardless of the child’s visible property value; unmanaged children are ignored for all layout calculations. You can go ahead and delete the anchorpane and add a _BorderPane_ instead. A BorderPane lays out children in top, left, right, bottom, and center positions.  
-  *FXML文件*最开始只有一个*AnchorPane*。AnchorPane允许其子节点边缘锚定的位置偏离自身边缘所在的位置。如果AnchorPane设置了边框和（或）填充，偏离距离是要从填充物的内部边缘开始测算的。对于受到管理的子节点，无论它们是否可见，都将被AnchorPane一一展开。而非托管子节点则不会被AnchorPane展开。当然，你也可以删除AnchorPane而添加BorderPane。BorderPane在TOP、LEFT、RIGHT、BOTTOM以及CENTER这5个固定位置展开子节点。
+  &emsp;&emsp;*FXML文件*最开始只有一个*AnchorPane*。AnchorPane允许其子节点边缘锚定的位置偏离自身边缘所在的位置。如果AnchorPane设置了边框和（或）填充，则偏离距离是从填充物的内部边缘开始测算的。对于受到管理的子节点，无论它们是否可见，都将被AnchorPane一一展开。而非托管子节点则不会被AnchorPane展开。当然，你也可以删除AnchorPane并添加BorderPane。BorderPane在TOP、LEFT、RIGHT、BOTTOM以及CENTER这5个固定位置展开子节点。
 ![U8k6w8.png](https://s1.ax1x.com/2020/07/12/U8k6w8.png)  
   
 You can add a BorderPane by dragging from the **Container** menu a borderpane and then drop it in the **Hierarchy** menu. Now we can add the button that will allow us to start and stop the stream. Take a button component from the
 **Controls** menu and drop it on the **BOTTOM** field of our BP. As we can see, on the right we will get three menus(Properties, Layout, Code) which are used to customize our selected component. For example we can change text of
 our button in“StartCamera”in the **Text** field under the **Properties** menu and the id of the button(e.g. “start_btn”) in the **fx:id** field under the **Code** menu.  
- 从**Container**菜单中拽一个BorderPane并将其放到**Hierarchy**菜单中，即可添加一个BorderPane。BorderPane添加完毕后，我们再来添加一个Button,它之后可以用来播放/关闭视频流。从**Contols**菜单中拽一个Button并将其放到我们刚刚添加的BP（即BorderPane）的**底部**区域。我们可以看到，下图中右边区域有3个菜单（Properties、Layout、Code），用于自定义被选中组件。例如，我们可以在**Properties**菜单下的**Text**区域修改之前添加的Button内容为“StartCamera”，还可以在**Code**菜单下的**fx:id**区域修改Button的id(比如改成“start_btn”)。
+ &emsp;&emsp;从**Container**菜单中拽一个BorderPane并将其放到**Hierarchy**菜单中，即可添加一个BorderPane。BorderPane添加完毕后，我们再来添加一个Button,它之后可以用来播放/关闭视频流。从**Contols**菜单中拽一个Button并将其放到我们刚刚添加的BP（即BorderPane）的**底部**区域。我们可以看到，下图中右边区域有3个菜单（Properties、Layout、Code），用于自定义被选中组件。例如，我们可以在**Properties**菜单下的**Text**区域修改之前添加的Button内容为“StartCamera”，还可以在**Code**菜单下的**fx:id**区域修改Button的id(比如改成“start_btn”)。
 ![U8kzOx.png](https://s1.ax1x.com/2020/07/12/U8kzOx.png)  
   
 ![U8AEpd.png](https://s1.ax1x.com/2020/07/12/U8AEpd.png)  
