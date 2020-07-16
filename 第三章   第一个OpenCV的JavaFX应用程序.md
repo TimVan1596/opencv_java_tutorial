@@ -45,21 +45,27 @@
 &emsp;&emsp;不妨来具体地看一看我到底在讲些什么。
    
 &emsp;&emsp;*FXML文件*最开始只有一个*AnchorPane*。AnchorPane中，允许存在一个偏离距离，位于AnchorPane子节点边缘锚定的位置与AnchorPane自身边缘所在的位置之间。如果AnchorPane设置了border和（或）padding，则偏离距离要从它们的内边缘开始算起。对于受到AnchorPane管理的子节点，无论它们是否可见，都将被AnchorPane一一展开。而非托管子节点则不会被AnchorPane展开。  
+  
 &emsp;&emsp;当然，你也可以删除AnchorPane并添加BorderPane。BorderPane在TOP、LEFT、RIGHT、BOTTOM以及CENTER这5个固定位置展开子节点。  
 
 ![U8k6w8.png](https://images.gitee.com/uploads/images/2020/0716/170450_ecd69550_1464254.png)  
    
  &emsp;&emsp;从“Container”菜单中拖拽一个BorderPane并将其放到“Hierarchy”菜单中，即可添加一个BorderPane。BorderPane添加完毕后，我们再来添加一个Button,它之后可以用来播放/关闭视频流。从“Contols”菜单中拖拽一个Button并将其放到我们刚刚添加的BP（即BorderPane）的**BOTTOM**区域，Button就添加完成了。  
+  
  &emsp;&emsp;我们现在可以看到，界面的右方区域有3个菜单（“Properties”、“Layout”、“Code”），用于自定义被选中组件。例如，我们可以在“Properties”菜单下的“Text”区域修改之前添加的Button内容为“StartCamera”，还可以在“Code”菜单下的“fx:id”区域修改Button的id(比如改成“start_btn”)。接下来在从**控制器**方法编辑button属性时，我们就需要用到button的id。  
-&emsp;&emsp;在界面中还可以看到，button现在离窗口的距离特别近。因此要为button设置一定的下边距。我们可以在“Layout”菜单中进行相应操作。
+
+&emsp;&emsp;在界面中还可以看到，button现在离窗口的距离特别近。因此要为button设置一定的下边距。我们可以在“Layout”菜单中进行相应操作。  
+
 ![U8kzOx.png](https://images.gitee.com/uploads/images/2020/0716/170449_80184d49_1464254.png)  
   
 ![U8AEpd.png](https://images.gitee.com/uploads/images/2020/0716/170448_d93bfe99_1464254.png)  
  
-&emsp;&emsp;为了能让button正常运行，我们必须在“Code”菜单下的“OnAction”这一栏设定好方法名称（比如“startCamera”），此处设定的方法将执行我们预想的功能。
+&emsp;&emsp;为了能让button正常运行，我们必须在“Code”菜单下的“OnAction”这一栏设定好方法名称（比如“startCamera”），此处设定的方法将执行我们预想的功能。  
+
 ![U8EPuq.png](https://images.gitee.com/uploads/images/2020/0716/170449_b1f17c57_1464254.png)  
   
-&emsp;&emsp;然后从“Controls”菜单中拖拽一个*ImageView*添加到BP的**CENTER**区域中。同样地，为ImageView设置一定的边距并对其id加以修改（比如改成“currentFrame”）。
+&emsp;&emsp;然后从“Controls”菜单中拖拽一个*ImageView*添加到BP的**CENTER**区域中。同样地，为ImageView设置一定的边距并对其id加以修改（比如改成“currentFrame”）。  
+
 ![U8EzdK.png](https://images.gitee.com/uploads/images/2020/0716/170450_2dc463fe_1464254.png)  
   
 &emsp;&emsp;最后，必须指定一个控制器类去管理我们的GUI。为此，需添加我们之前选定的控制器类名称到位于窗口左下方的“Controller”菜单下的“Controller class”这一栏。 
@@ -150,11 +156,11 @@ Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
 
 &emsp;&emsp;**从上面这行代码可以看到，cvtColor用到以下参数：**  
   
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;•**源图像（frame）** 
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;•**源图像（frame）；** 
          
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;•**目标图像（frame），用来保存转换后的灰度图**  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;•**目标图像（frame），用来保存转换后的灰度图；**  
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;•**附加参数，用于指示将要执行何种转换。在这里使用的附加参数是**COLOR_BGR2GRAY** （不使用imread是因为对于彩色图像imread默认使用BGR通道顺序）**
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;•**附加参数，用于指示将要执行何种转换。在这里使用的附加参数是COLOR_BGR2GRAY （不使用imread是因为对于彩色图像imread默认使用BGR通道顺序）。**
  
 &emsp;&emsp;为了能将捕获的帧放入ImageView中，我们需要将矩阵转换成图像。具体操作如下：  
 &emsp;&emsp;&emsp;&emsp;•首先，我们创建一个缓冲区，用于存储矩阵。  
@@ -176,11 +182,11 @@ Imgcodecs.imencode(".png", frame, buffer);
 
 &emsp;&emsp;&emsp;&emsp;**imencode函数用到3个参数：**  
  
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;•**“.png”，即文件扩展名，用于定义输出格式**
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;•**“.png”，即文件扩展名，用于定义输出格式；**
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**•frame，即待写入图像**  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**•frame，即待写入图像；**  
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**•buffer，即输出缓存区，可以自适应压缩后图像的大小**  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**•buffer，即输出缓存区，可以自适应压缩后图像的大小。**  
  
 &emsp;&emsp;将捕获的帧放入缓存区后，我们就要用到**ByteArrayInputStream**来流式传输缓存区中被压缩的图像：  
 ```
