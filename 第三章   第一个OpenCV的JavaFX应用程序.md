@@ -18,13 +18,17 @@
 
 ## 3.3 JavaFX中的第一个应用程序
 &emsp;&emsp;本教程编写出来的应用程序将捕获来自网络摄像机的视频流并将其显示在图形用户界面（GUI）上。  
+  
 &emsp;&emsp;我们是使用Scene Builder来创建GUI的。创建完毕后，GUI将具有一个按钮和一个简单的图像视图框，前者用于播放/关闭视频流，后者用于放置视频流帧。
 ## 3.4 安装e(fx)clipse插件和Scene Builder
 &emsp;&emsp;请按照本教程的指导在Eclipse中安装**e(fx)clipse**插件，本教程内容详见[http://www.eclipse.org/efxclipse/install.html#fortheambitious](http://www.eclipse.org/efxclipse/install.html#fortheambitious)。  
+  
 &emsp;&emsp;如果不想安装此类插件，只需创建一个惯用的**Java项目**——*JavaFX Scene Builder 2.0*即可。请从[http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html](http://www.oracle.com/technetwork/java/javafxscenebuilder-1x-archive-2199384.html)下载安装*JavaFX Scene Builder 2.0*。
   
 &emsp;&emsp;现在可以来新建一个JavaFX项目了，具体操作为：  
-&emsp;&emsp;&emsp;&emsp;•转到“File > New > Project...”，选择“JavaFX project....”； 
+  
+&emsp;&emsp;&emsp;&emsp;•转到“File > New > Project...”，选择“JavaFX project....”；  
+ 
 ![U8Puid.png](https://images.gitee.com/uploads/images/2020/0716/170447_07d86fe4_1464254.png)  
   
 &emsp;&emsp;&emsp;&emsp;•输入项目名称（名称自选），单击“Next”；  
@@ -73,8 +77,11 @@
 &emsp;&emsp;我们刚刚使用Scene Builder创建了我们第一个GUI。如果你现在保存文件回到Eclipse，你会看到Eclipse已经自动生成了某些FXML代码。 
 ## 3.6 JavaFX中的一些重要概念
 &emsp;&emsp;**Stage**：应用程序显示的地方（比如Windows窗口）；  
+  
 &emsp;&emsp;**Scene**：即节点容器，此容器中的节点构成了你的应用程序的某个“页面”；  
+  
 &emsp;&emsp;**Node**：Scene中的一个元素，具有可视化、可交互的特点。节点可能是以分层嵌套的形式存在于Scene中。  
+  
 &emsp;&emsp;在*Main类*中，我们需要将自身的*primary stage*传递给*start*函数： 
 ```
 public void start(Stage primaryStage)
