@@ -14,7 +14,7 @@
 
 &emsp;&emsp;&emsp;&emsp;•使用 _Scene Builder_ ; 
 
-&emsp;&emsp;&emsp;&emsp;•编写并运行应用程序 
+&emsp;&emsp;&emsp;&emsp;•编写并运行应用程序。 
 
 ## 3.3 JavaFX中的第一个应用程序
 &emsp;&emsp;本教程编写出来的应用程序将捕获来自网络摄像机的视频流并将其显示在图形用户界面（GUI）上。  
