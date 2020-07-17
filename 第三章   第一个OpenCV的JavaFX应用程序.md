@@ -170,6 +170,7 @@ Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;•**附加参数，用于指示将要执行何种转换。在这里使用的附加参数是COLOR_BGR2GRAY （不使用imread是因为对于彩色图像imread默认使用BGR通道顺序）。**
  
 &emsp;&emsp;为了能将捕获的帧放入ImageView中，我们需要将矩阵转换成图像。具体操作如下：  
+  
 &emsp;&emsp;&emsp;&emsp;•首先，我们创建一个缓冲区，用于存储矩阵。  
 ```
 MatOfByte buffer = new MatOfByte();  
