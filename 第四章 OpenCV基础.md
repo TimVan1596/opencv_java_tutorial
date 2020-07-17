@@ -6,17 +6,17 @@
 ---
 ## 4.1在本教程中要做什么  
 
-在本教程中，我们将：  
+&emsp;&emsp;在本教程中，我们将：  
  
-&emsp;&emsp;•创建一个初步的交互复选框，可以修改视频流的颜色；    
-  
-&emsp;&emsp;•新增一个初步的交互复选框去“透明叠加”一个徽标到视频流中；    
+&emsp;&emsp;&emsp;&emsp;•创建一个初步的交互*复选框*，可以修改视频流的颜色；  
 
-&emsp;&emsp;•显示该视频流的直方图（包括单通道和三通道）。
+&emsp;&emsp;&emsp;&emsp;•新增另一个初步的交互*复选框*去“透明叠加”一个徽标到视频流中；  
+
+&emsp;&emsp;&emsp;&emsp;•显示该视频流的*直方图*（包括单通道和三通道）。
 ## 4.2 准备  
-&emsp;&emsp;关于这个教程，我们先来创建一个新的JavaFX项目并在项目中构建一个场景，这个场景要与前面章节已经做出来的相同。这样一来，我们就会得到一个含有子窗口的窗口。在子窗口中：  
+&emsp;&emsp;关于这个教程，我们先来创建一个新的JavaFX项目并在项目中构建一个Scene，这个Scene要与前面章节已经做出来的相同。这样一来，我们就会得到一个含有BorderPane的窗口。BorderPane中：  
   
-&emsp;&emsp;&emsp;&emsp;•位于底部的Hbox里面有一个“Start Camera”按钮：
+&emsp;&emsp;&emsp;&emsp;•**BOTTOM区域**的Hbox里面有一个Button：
 ```
 <HBox alignment="CENTER" >
    <padding>
@@ -26,25 +26,25 @@
 ˓→ #startCamera" />
 </HBox>
 ```
-&emsp;&emsp;&emsp;&emsp;•位于中央的为视图预览界面：
+&emsp;&emsp;&emsp;&emsp;•**CENTER区域**里面有一个ImageView：
 ```
 <ImageView fx:id="currentFrame" />
 ```
 
 ## 4.3 颜色通道复选框  
-&emsp;&emsp;我们用Scene Builder打开fxml文件并在子窗口的右方区域添加一个垂直框Vbox。Vbox在一个独立纵栏展开其子项。如果Vbox设置了边框和/或填充，则其子项将在填充物中展开。Vbox也会自动调整子项的高度为最佳高度（若可调整）。Vbox还会通过它的fillWidth属性来判定是将子项的宽度调整为Vbox自身的宽度还是最佳宽度（fillWidth默认为真）。Hbox的运行方式类似于Vbox但前者不是垂直地而是水平地展开子项。     
-&emsp;&emsp;现在我们可以在Vbox中添加一个新的复选框，修改其text为“Show in gray scale”，并设置id（例如“grayscale”）。
+&emsp;&emsp;使用Scene Builder打开fxml文件并在BorderPane的**RIGHT区域**添加一个垂直框Vbox。Vbox在一个独立纵栏展开其子项。如果Vbox设置了border和/或padding，则其子项将在填充物中展开。Vbox也会自动调整子项的高度为最佳高度（若可调整）。Vbox还会通过它的fillWidth属性来判定是将子项的宽度调整为Vbox自身的宽度还是最佳宽度（fillWidth默认为真）。Hbox的运行方式类似于Vbox但前者不是垂直地而是水平地展开子项。     
+&emsp;&emsp;现在我们可以在Vbox中添加一个新的CheckBox，修改其内容为“Show in gray scale”，并设置一个id（例如“grayscale”）。
 ```
 <CheckBox fx:id="grayscale" text="Show in gray scale" />
 ``` 
-&emsp;&emsp;我们还要为这部分添加一个标题，添加方法是在新添加的复选框前面再放置一个新的text，但这个text仍然要在原来的Vbox内。在这之后，我们将此text的内容设定为“Controls”（可以在“Shapes”菜单下找到“text element”这一栏）。
+&emsp;&emsp;我们还要为这部分添加一个标题，添加方法是在新添加的CheckBox前面再放置一个新的Text，但这个Text仍然要在原来的Vbox内（Text可以在“Shapes”菜单下找到）。Text添加完毕后，我们其内容设定为“Controls”。
 ```
 <Text text="Controls" />
 ```  
 &emsp;&emsp;在Scene Builder中，我们得到了：
 ![NFDM0s.png](https://s1.ax1x.com/2020/06/16/NFDM0s.png)    
 
-&emsp;&emsp;第一个任务的可视界面已经完成。我们目前需要改进controller。在上一个教程中，我们通过下列这行代码可以控制显示在屏幕上的信道数：
+&emsp;&emsp;第一个任务的可视界面已经完成。接下来我们需要相应地修改Controller。在上一个教程中，我们通过下列这行代码可以控制显示在屏幕上的信道数：
 ```
 Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
 ```    
@@ -61,11 +61,11 @@ if (grayscale.isSelected())
 }
 ``` 
 ## 4.4 载入图像并添加到视频流
-&emsp;&emsp;接下来要再添加另一个复选框，这个复选框如果被选中图像就会显示在相机流上。具体的方法是首先在项目里添加一个图像，即在项目的根目录里创建一个文件夹然后将图像放到这个文件夹里。那么在我的项目里目前就有一个资源文件夹，这个文件夹带有一张名称为Poli.png的照片。回到Eclipse并刷新项目（你的项目里应该包含了新的文件夹）。接着用Scene Builder打开之前的FXML文件并在控制视频流颜色的复选框下面再添加一个新的复选框。我们需要将它的Text设定为“Show logo”，它在OnAction这一栏填为“Loadlogo”，以及它的id设为“logoCheckBox”。例如代码就会是这样： 
+&emsp;&emsp;接下来要再添加另一个CheckBox，这个CheckBox如果被选中图像就会显示在相机流上。具体的方法是首先在项目里添加一个图像，即在项目的根目录里创建一个文件夹然后将图像放到这个文件夹里。那么在我的项目里目前就有一个resources文件夹，这个文件夹带有一张名称为Poli.png的照片。回到Eclipse并刷新项目（你的项目里应该包含了新的文件夹）。接着用Scene Builder打开之前的FXML文件并在控制视频流颜色的Checkbox下面再添加一个新的CheckBox。我们需要设定它的内容，它的id，以及它在OnAction这一栏的方法名。例如代码就会是这样： 
 ```
 <CheckBox fx:id="logoCheckBox" text="Show logo" onAction="#loadLogo" />
 ```
-&emsp;&emsp;我们要在controller class这一栏定义一个与“logoCheckbox”相链接的新的变量“Checkbox”并且相应地修改代码以便当复选框被选中且视频流开启时徽标可以显示在屏幕上。  
+&emsp;&emsp;我们要在controller class这一栏定义一个新的变量，与此CheckBox以及此CheckBox所用到的方法相链接。我们还要相应地修改代码以便当此CheckBox被选中且视频流开启时徽标可以显示在屏幕上。  
 &emsp;&emsp;**变量**：
 ```
 @FXML  
@@ -91,7 +91,7 @@ protected void loadLogo()
 Rect roi = new Rect(frame.cols()-logo.cols(), frame.rows()-logo.rows(), logo.cols(),
 ˓→ logo.rows());
 ```
-&emsp;&emsp;接着我们需要控制被返回的矩阵的ROI，由此就可以将徽标放置到帧的理想区域（由ROI所界定）。  
+&emsp;&emsp;接着我们需要控制被返回的矩阵的ROI，由此就可以将徽标放置到帧的理想区域（此区域由ROI所界定）。  
 
 ```
 Mat imageROI = frame.submat(roi);
@@ -130,7 +130,7 @@ Core.addWeighted(imageROI, 1.0, logo, 0.7, 0.0, imageROI);
 Mat mask = logo.clone();  
 logo.copyTo(imageROI, mask);
 ```
-&emsp;&emsp;到目前为止我们所做的一切都是为了把徽标添加到图像中去。只有当logoCheckbox复选框被选中且图像最终成功地加载出来，才可以实现我们之前的操作。因此我们必须增加一个if条件：
+&emsp;&emsp;到目前为止我们所做的一切都是为了把徽标添加到图像中去。只有当第二次添加的Checkbox被选中且图像最终成功地加载出来，才可以实现我们之前的操作。因此我们必须增加一个if条件：
 ```
 if (logoCheckBox.isSelected() && this.logo != null)  
 {  
