@@ -184,6 +184,7 @@ In the RGB case we will need all of the hist defined, in the grayscale case inst
 We are now ready to do the histogram calculation:  
 where gray is the flag we passed to the showHistogram method.  
 ##4.6 Draw the Histogram
+## 4.6 绘制直方图
 Next step is to draw the calculated histogram in our GUI. Open the fxml file with Scene Builder and add an ImageView
 above the “Controls” text in the right of the BP and set its id:  
 
